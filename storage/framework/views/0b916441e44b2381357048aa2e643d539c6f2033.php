@@ -6,19 +6,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="index" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('assets/images/logo-dark.png') }}" alt="" height="17">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-dark.png')); ?>" alt="" height="17">
                         </span>
                     </a>
 
                     <a href="index" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-sm.png')); ?>" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="17">
+                            <img src="<?php echo e(URL::asset('assets/images/logo-light.png')); ?>" alt="" height="17">
                         </span>
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                             <div class="notification-list">
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">Angela Bernier</h6>
@@ -93,7 +93,7 @@
                                 </a>
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">David Grasso</h6>
@@ -102,7 +102,7 @@
                                 </a>
                                 <!-- item -->
                                 <a href="javascript:void(0);" class="d-flex dropdown-item notify-item py-2">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" class="me-3 rounded-circle avatar-xs"
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-5.jpg')); ?>" class="me-3 rounded-circle avatar-xs"
                                         alt="user-pic">
                                     <div class="flex-1">
                                         <h6 class="m-0">Mike Bunch</h6>
@@ -213,7 +213,7 @@
                       <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel" aria-labelledby="messages-tab">
                         <div data-simplebar style="max-height: 300px;" class="pe-2">
                           <div class="text-reset notification-item d-block dropdown-item">
-                            {{-- data notif di sini --}}
+                            
                           </div>
                           <div class="my-3 text-center">
                             <button type="button" class="btn btn-soft-success waves-effect waves-light">
@@ -224,7 +224,7 @@
                     </div>
                     <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
                       <div class="w-25 w-sm-50 pt-3 mx-auto">
-                        <img src="{{ URL::asset('assets/images/svg/bell.svg') }}" class="img-fluid" alt="user-pic">
+                        <img src="<?php echo e(URL::asset('assets/images/svg/bell.svg')); ?>" class="img-fluid" alt="user-pic">
                       </div>
                       <div class="text-center pb-5 mt-2">
                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
@@ -238,10 +238,10 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('assets/images/users/avatar-1.jpg') }}@endif"
+                            <img class="rounded-circle header-profile-user" src="<?php if(Auth::user()->avatar != ''): ?><?php echo e(URL::asset('images/' . Auth::user()->avatar)); ?><?php else: ?><?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?><?php endif; ?>"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->username}}</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo e(Auth::user()->username); ?></span>
                                 <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
                             </span>
                         </span>
@@ -273,9 +273,9 @@
                         <a class="dropdown-item " href="javascript:void();"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                 class="bx bx-power-off font-size-16 align-middle me-1"></i> <span
-                                key="t-logout">@lang('translation.logout')</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                key="t-logout"><?php echo app('translator')->get('translation.logout'); ?></span></a>
+                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
                         </form>
                     </div>
                 </div>
@@ -283,3 +283,4 @@
         </div>
     </div>
 </header>
+<?php /**PATH /Users/admin/projects/siresi/resources/views/layouts/topbar.blade.php ENDPATH**/ ?>

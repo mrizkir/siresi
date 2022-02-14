@@ -1,8 +1,7 @@
-@extends('layouts.master-without-nav')
-@section('title')
-	@lang('translation.signin')
-@endsection
-@section('content')
+<?php $__env->startSection('title'); ?>
+	<?php echo app('translator')->get('translation.signin'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="auth-page-wrapper pt-5">
 	<!-- auth page bg -->
 	<div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
@@ -23,7 +22,7 @@
 					<div class="text-center mt-sm-5 mb-4 text-white-50">
 						<div>
 							<a href="index" class="d-inline-block auth-logo">
-								<img src="{{ URL::asset('assets/images/logo-light.png')}}" alt="" height="20">
+								<img src="<?php echo e(URL::asset('assets/images/logo-light.png')); ?>" alt="" height="20">
 							</a>
 						</div>
 						<p class="mt-3 fs-15 fw-medium">Sistem Informasi Resi</p>
@@ -42,28 +41,56 @@
 								<p class="text-muted">Sign in to continue to Siresi.</p>
 							</div>
 							<div class="p-2 mt-4">
-								<form action="{{ route('login') }}" method="POST">
-									@csrf
+								<form action="<?php echo e(route('login')); ?>" method="POST">
+									<?php echo csrf_field(); ?>
 									<div class="mb-3">
 										<label for="username" class="form-label">Username</label>
-										<input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', 'admin@themesbrand.com') }}" id="username" name="email" placeholder="Enter username">
-										@error('email')
+										<input type="text" class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('email', 'admin@themesbrand.com')); ?>" id="username" name="email" placeholder="Enter username">
+										<?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
 											<span class="invalid-feedback" role="alert">
-												<strong>{{ $message }}</strong>
+												<strong><?php echo e($message); ?></strong>
 											</span>
-										@enderror
+										<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 									</div>
 
 									<div class="mb-3">                                        
 										<label class="form-label" for="password-input">Password</label>
 										<div class="position-relative auth-pass-inputgroup mb-3">
-											<input type="password" class="form-control pe-5 @error('password') is-invalid @enderror" name="password" placeholder="Enter password" id="password-input" value="123456">
+											<input type="password" class="form-control pe-5 <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="password" placeholder="Enter password" id="password-input" value="123456">
 											<button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-											@error('password')
+											<?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
 												<span class="invalid-feedback" role="alert">
-													<strong>{{ $message }}</strong>
+													<strong><?php echo e($message); ?></strong>
 												</span>
-											@enderror
+											<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 										</div>
 									</div>
 									
@@ -98,9 +125,11 @@
 	</footer>
 	<!-- end Footer -->
 </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <script src="assets/libs/particles.js/particles.js.min.js"></script>
 <script src="assets/js/pages/particles.app.js"></script>
 <script src="assets/js/pages/password-addon.init.js"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master-without-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/admin/projects/siresi/resources/views/auth/login.blade.php ENDPATH**/ ?>

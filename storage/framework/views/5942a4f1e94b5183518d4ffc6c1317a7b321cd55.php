@@ -1,10 +1,9 @@
-@extends('layouts.master')
-@section('title') @lang('translation.dashboards') @endsection
-@section('css')
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.dashboards'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
 <link href="assets/libs/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/libs/swiper/swiper.min.css" rel="stylesheet" type="text/css" />
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="row">
     <div class="col">
         <div class="h-100">
@@ -290,7 +289,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/products/img-1.png') }}" alt="" class="img-fluid d-block" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/products/img-1.png')); ?>" alt="" class="img-fluid d-block" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-product-details" class="text-reset">Branded T-Shirts</a></h5>
@@ -319,7 +318,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/products/img-2.png') }}" alt="" class="img-fluid d-block" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/products/img-2.png')); ?>" alt="" class="img-fluid d-block" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-14 my-1"><a href="apps-ecommerce-product-details" class="text-reset">Bentwood Chair</a></h5>
@@ -348,7 +347,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/products/img-3.png') }}" alt="" class="img-fluid d-block" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/products/img-3.png')); ?>" alt="" class="img-fluid d-block" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-product-details" class="text-reset">Borosil Paper Cup</a></h5>
@@ -377,7 +376,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/products/img-4.png') }}" alt="" class="img-fluid d-block" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/products/img-4.png')); ?>" alt="" class="img-fluid d-block" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-product-details" class="text-reset">One Seater Sofa</a></h5>
@@ -406,7 +405,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                        <img src="{{ URL::asset('assets/images/products/img-5.png') }}" alt="" class="img-fluid d-block" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/products/img-5.png')); ?>" alt="" class="img-fluid d-block" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-product-details" class="text-reset">Stillbird Helmet</a></h5>
@@ -489,7 +488,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" class="avatar-sm p-2" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-1.png')); ?>" alt="" class="avatar-sm p-2" />
                                                     </div>
                                                     <div>
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-seller-details" class="text-reset">iTest Factory</a></h5>
@@ -515,7 +514,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-2.png') }}" alt="" class="avatar-sm p-2" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-2.png')); ?>" alt="" class="avatar-sm p-2" />
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-seller-details" class="text-reset">Digitech Galaxy</a></h5>
@@ -541,7 +540,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-3.png') }}" alt="" class="avatar-sm p-2" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-3.png')); ?>" alt="" class="avatar-sm p-2" />
                                                     </div>
                                                     <div class="flex-gow-1">
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-seller-details" class="text-reset">Nesta Technologies</a></h5>
@@ -567,7 +566,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" class="avatar-sm p-2" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-8.png')); ?>" alt="" class="avatar-sm p-2" />
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-seller-details" class="text-reset">Zoetic Fashion</a></h5>
@@ -593,7 +592,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-5.png') }}" alt="" class="avatar-sm p-2" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-5.png')); ?>" alt="" class="avatar-sm p-2" />
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <h5 class="fs-13 my-1"><a href="apps-ecommerce-seller-details" class="text-reset">Meta4Systems</a></h5>
@@ -706,7 +705,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/users/avatar-1.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">Alex Smith</div>
                                                 </div>
@@ -730,7 +729,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">Jansh Brown</div>
                                                 </div>
@@ -754,7 +753,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">Ayaan Bowen</div>
                                                 </div>
@@ -778,7 +777,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/users/avatar-4.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">Prezy Mark</div>
                                                 </div>
@@ -802,7 +801,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="<?php echo e(URL::asset('assets/images/users/avatar-6.jpg')); ?>" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">Vihan Hudda</div>
                                                 </div>
@@ -864,13 +863,13 @@
                                     <p class="text-muted mb-1">By Nesta Technologies</p>
                                     <div class="d-inline-flex gap-2 border border-dashed p-2 mb-2">
                                         <a href="apps-ecommerce-product-details" class="bg-light rounded p-1">
-                                            <img src="{{ URL::asset('assets/images/products/img-8.png') }}" alt="" class="img-fluid d-block" />
+                                            <img src="<?php echo e(URL::asset('assets/images/products/img-8.png')); ?>" alt="" class="img-fluid d-block" />
                                         </a>
                                         <a href="apps-ecommerce-product-details" class="bg-light rounded p-1">
-                                            <img src="{{ URL::asset('assets/images/products/img-2.png') }}" alt="" class="img-fluid d-block" />
+                                            <img src="<?php echo e(URL::asset('assets/images/products/img-2.png')); ?>" alt="" class="img-fluid d-block" />
                                         </a>
                                         <a href="apps-ecommerce-product-details" class="bg-light rounded p-1">
-                                            <img src="{{ URL::asset('assets/images/products/img-10.png') }}" alt="" class="img-fluid d-block" />
+                                            <img src="<?php echo e(URL::asset('assets/images/products/img-10.png')); ?>" alt="" class="img-fluid d-block" />
                                         </a>
                                     </div>
                                     <p class="mb-0 text-muted"><small>9:47 PM Yesterday</small></p>
@@ -878,7 +877,7 @@
                             </div>
                             <div class="acitivity-item py-3 d-flex">
                                 <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle acitivity-avatar">
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" alt="" class="avatar-xs rounded-circle acitivity-avatar">
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6 class="mb-1 lh-base">Natasha Carey have liked the products</h6>
@@ -944,7 +943,7 @@
                             </div>
                             <div class="acitivity-item d-flex">
                                 <div class="flex-shrink-0">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-xs rounded-circle acitivity-avatar" />
+                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" alt="" class="avatar-xs rounded-circle acitivity-avatar" />
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6 class="mb-1 lh-base">Frank Hook Commented</h6>
@@ -1005,7 +1004,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 avatar-sm">
                                                     <div class="avatar-title bg-light rounded">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-1.png') }}" alt="" height="30">
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-1.png')); ?>" alt="" height="30">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
@@ -1032,7 +1031,7 @@
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt="" class="avatar-sm rounded">
+                                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-3.jpg')); ?>" alt="" class="avatar-sm rounded">
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <div>
@@ -1059,7 +1058,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 avatar-sm">
                                                     <div class="avatar-title bg-light rounded">
-                                                        <img src="{{ URL::asset('assets/images/companies/img-8.png') }}" alt="" height="30">
+                                                        <img src="<?php echo e(URL::asset('assets/images/companies/img-8.png')); ?>" alt="" height="30">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
@@ -1086,7 +1085,7 @@
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-sm rounded">
+                                                    <img src="<?php echo e(URL::asset('assets/images/users/avatar-2.jpg')); ?>" alt="" class="avatar-sm rounded">
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
                                                     <div>
@@ -1243,7 +1242,7 @@
 
                     <div class="card sidebar-alert bg-light border-0 text-center mx-4 mb-0 mt-3">
                         <div class="card-body">
-                            <img src="{{ URL::asset('assets/images/giftbox.png') }}" alt="">
+                            <img src="<?php echo e(URL::asset('assets/images/giftbox.png')); ?>" alt="">
                             <div class="mt-4">
                                 <h5>Invite New Seller</h5>
                                 <p class="text-muted lh-base">Refer a new seller to us and earn $100 per refer.</p>
@@ -1257,13 +1256,15 @@
         </div> <!-- end .rightbar-->
 
     </div> <!-- end col -->
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 <!-- apexcharts -->
-<script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>
-<script src="{{ URL::asset('assets/libs/swiper/swiper.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
 <!-- dashboard init -->
-<script src="{{ URL::asset('/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('/assets/js/pages/dashboard-ecommerce.init.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/admin/projects/siresi/resources/views/index.blade.php ENDPATH**/ ?>
