@@ -1,4 +1,8 @@
 /vendor/
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/testing
+/storage/framework/views
 node_modules/
 npm-debug.log
 yarn-error.log
