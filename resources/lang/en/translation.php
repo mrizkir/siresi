@@ -42,7 +42,7 @@ return [
     "create-invoice"=>"Create Invoice",
     "supprt-tickets"=>"Support Tickets",
     "ticket-details"=>"Ticket Details",
-    "layouts"=>"Layouts",
+    "layouts"=>"Layoutxxx",
     "horizontal"=>"Horizontal",
     "detached"=>"Detached",
     "two-column"=>"Two Column",
