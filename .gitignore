@@ -26,3 +26,9 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 composer.lock
+
+yarn.lock
+package-lock.json
+public/assets
+public/images
+public/mix-manifest.json
