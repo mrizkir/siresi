@@ -53,7 +53,7 @@ var third_party_assets = {
         },
         { "name": "cleave.js", "assets": ["./node_modules/cleave.js/dist/cleave.min.js"] },
         { "name": "apexcharts", "assets": ["./node_modules/apexcharts/dist/apexcharts.min.js"] },
-        // { "name": "bootstrap", "assets": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"] },
+        { "name": "bootstrap", "assets": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"] },
         { "name": "chart.js", "assets": ["./node_modules/chart.js/dist/chart.min.js"] },
         { "name": "fg-emoji-picker", "assets": ["./node_modules/fg-emoji-picker/fgEmojiPicker.js"] },
 

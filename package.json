@@ -1,8 +1,8 @@
 {
     "private": true,
-    "name": "velzon",
+    "name": "siresi",
     "version": "1.0.0",
-    "author": "Themesbrand",
+    "author": "LPP STT Indonesia Tanjungpinang",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",

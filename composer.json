@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "beverra/siresi",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Sistem Informasi Resi ",
+    "keywords": ["sistem informasi", "siresi"],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
