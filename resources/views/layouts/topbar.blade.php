@@ -270,13 +270,10 @@
                                 class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Settings</span></a>
                         
-                        <a class="dropdown-item " href="javascript:void();"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                                class="bx bx-power-off font-size-16 align-middle me-1"></i> <span
-                                key="t-logout">@lang('translation.logout')</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                        <a class="dropdown-item " href="{{url('/logout')}}">
+                          <i class="bx bx-power-off font-size-16 align-middle me-1"></i>
+                          <span key="t-logout">Logout</span>
+                        </a>                        
                     </div>
                 </div>
             </div>

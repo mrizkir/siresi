@@ -288,7 +288,7 @@ var app_pages_assets = {
         folder.src + "js/pages/apexcharts-scatter.init.js",
         folder.src + "js/pages/apexcharts-timeline.init.js",
         folder.src + "js/pages/apexcharts-treemap.init.js",
-        // folder.src + "js/pages/calendar.init.js",
+        folder.src + "js/pages/calendar.init.js",
         folder.src + "js/pages/card.init.js",
         folder.src + "js/pages/chartjs.init.js",
         folder.src + "js/pages/chat.init.js",

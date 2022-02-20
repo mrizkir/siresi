@@ -3,13 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Auth::routes();
+Auth::routes(['register'=>'false', 'logout'=>false]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
-Route::get('/scan', [App\Http\Controllers\Transaksi\ScanResiController::class, 'scan'])->name('scan');
+Route::get('/logout',['uses'=>'App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
 
-//Update User Details
-Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+Route::group(['middleware'=>['disablepreventback', 'web', 'auth']], function() {
+  Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+  //Update User Details
+  Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
+  Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+
+  Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+
+  Route::get('/scan', [App\Http\Controllers\Transaksi\ScanResiController::class, 'scan'])->name('scan');
+});
