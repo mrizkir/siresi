@@ -1,6 +1,6 @@
 @extends('layouts.master-without-nav')
 @section('title')
-	@lang('translation.signin')
+	SIRESI - LOGIN
 @endsection
 @section('content')
 <div class="auth-page-wrapper pt-5">
@@ -42,12 +42,11 @@
 								<p class="text-muted">Sign in to continue to Siresi.</p>
 							</div>
 							<div class="p-2 mt-4">
-								<form action="{{ route('login') }}" method="POST">
-									@csrf
+								{!! Form::open(['url'=>route('login'), 'method'=>'post', 'id'=>'frmlogin', 'name'=>'frmlogin']) !!}
 									<div class="mb-3">
 										<label for="username" class="form-label">Username</label>
-										<input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', 'admin@themesbrand.com') }}" id="username" name="email" placeholder="Enter username">
-										@error('email')
+										<input type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" id="username" name="username" placeholder="Enter username">
+										@error('username')
 											<span class="invalid-feedback" role="alert">
 												<strong>{{ $message }}</strong>
 											</span>
@@ -57,7 +56,7 @@
 									<div class="mb-3">                                        
 										<label class="form-label" for="password-input">Password</label>
 										<div class="position-relative auth-pass-inputgroup mb-3">
-											<input type="password" class="form-control pe-5 @error('password') is-invalid @enderror" name="password" placeholder="Enter password" id="password-input" value="123456">
+											<input type="password" class="form-control pe-5 @error('password') is-invalid @enderror" name="password" placeholder="Enter password" id="password-input">
 											<button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
 											@error('password')
 												<span class="invalid-feedback" role="alert">
@@ -70,7 +69,7 @@
 									<div class="mt-4">
 										<button class="btn btn-success w-100" type="submit">Sign In</button>
 									</div>                                    
-								</form>
+									{!! Form::close() !!}
 							</div>
 						</div>
 						<!-- end card body -->
