@@ -79,14 +79,18 @@
                     <div class="collapse menu-dropdown" id="sidebarAuth">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#sidebarSignIn" class="nav-link" role="button"
-                                    aria-expanded="false" aria-controls="sidebarSignIn" >PERMISSION
-                                </a>
-                            
+                                <a href="#sidebarPermission" class="nav-link" role="button"
+                                    aria-expanded="false" aria-controls="sidebarPermission" >PERMISSION
+                                </a>                            
                             </li>
                             <li class="nav-item">
-                                <a href="#sidebarSignUp" class="nav-link"  role="button"
-                                    aria-expanded="false" aria-controls="sidebarSignUp" >ROLES
+                                <a href="#sidebarUserRoles" class="nav-link"  role="button"
+                                    aria-expanded="false" aria-controls="sidebarUserRoles" >ROLES
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#sidebarUserPicker" class="nav-link"  role="button"
+                                    aria-expanded="false" aria-controls="sidebarUserPicker" >USER PICKER
                                 </a>
                             </li>
                         </ul>
