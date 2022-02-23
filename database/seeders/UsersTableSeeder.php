@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
 			'username'=>'admin',
 			'password'=>Hash::make('12345678'),                
 			'name'=>'admin',                
-			'email'=>'admin@beverre.com',                
+			'email'=>'admin@beverra.com',                
 			'nomor_hp'=>'+612345678',			
 			'theme'=>'default',
 			'email_verified_at'=>Carbon::now(),
