@@ -89,7 +89,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#sidebarUserPicker" class="nav-link"  role="button"
+                                <a href="{{route('userpicker.index')}}" class="nav-link"  role="button"
                                     aria-expanded="false" aria-controls="sidebarUserPicker" >USER PICKER
                                 </a>
                             </li>
