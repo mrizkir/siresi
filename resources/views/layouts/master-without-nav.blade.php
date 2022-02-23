@@ -6,7 +6,7 @@
     <title>@yield('title') | BEVERRA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Sistem Informasi tracking Resi Beverra" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Mochammad Rizki Romdoni" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
         @include('layouts.head-css')
