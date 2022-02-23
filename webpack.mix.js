@@ -258,7 +258,7 @@ mix.copyDirectory(folder.src + "images", out);
 mix.sass('resources/scss/bootstrap.scss', folder.dist_assets + "css").minify(folder.dist_assets + "css/bootstrap.css");
 mix.sass('resources/scss/icons.scss', folder.dist_assets + "css").options({ processCssUrls: false }).minify(folder.dist_assets + "css/icons.css");
 mix.sass('resources/scss/app.scss', folder.dist_assets + "css").options({ processCssUrls: false }).minify(folder.dist_assets + "css/app.css");
-mix.sass('resources/scss/custom.scss', folder.dist_assets + "css").options({ processCssUrls: false }).minify(folder.dist_assets + "css/custom.css");
+mix.sass('resources/scss/style.scss', folder.dist_assets + "css").options({ processCssUrls: false }).minify(folder.dist_assets + "css/style.css");
 
 
 mix.webpackConfig({
@@ -271,111 +271,26 @@ mix.webpackConfig({
 //copying demo pages related assets
 var app_pages_assets = {
     js: [
-        folder.src + "js/pages/animation-aos.init.js",
-        folder.src + "js/pages/apexcharts-area.init.js",
-        folder.src + "js/pages/apexcharts-bar.init.js",
-        folder.src + "js/pages/apexcharts-boxplot.init.js",
-        folder.src + "js/pages/apexcharts-bubble.init.js",
-        folder.src + "js/pages/apexcharts-candlestick.init.js",
-        folder.src + "js/pages/apexcharts-column.init.js",
-        folder.src + "js/pages/apexcharts-heatmap.init.js",
-        folder.src + "js/pages/apexcharts-line.init.js",
-        folder.src + "js/pages/apexcharts-mixed.init.js",
-        folder.src + "js/pages/apexcharts-pie.init.js",
-        folder.src + "js/pages/apexcharts-polararea.init.js",
-        folder.src + "js/pages/apexcharts-radar.init.js",
-        folder.src + "js/pages/apexcharts-radialbar.init.js",
-        folder.src + "js/pages/apexcharts-scatter.init.js",
-        folder.src + "js/pages/apexcharts-timeline.init.js",
-        folder.src + "js/pages/apexcharts-treemap.init.js",
-        folder.src + "js/pages/calendar.init.js",
-        folder.src + "js/pages/card.init.js",
-        folder.src + "js/pages/chartjs.init.js",
-        folder.src + "js/pages/chat.init.js",
-        folder.src + "js/pages/coming-soon.init.js",
-        folder.src + "js/pages/crm-companies.init.js",
-        folder.src + "js/pages/crm-contact.init.js",
-        folder.src + "js/pages/crm-leads.init.js",
-        folder.src + "js/pages/crypto-buy-sell.init.js",
-        folder.src + "js/pages/crypto-kyc.init.js",
-        folder.src + "js/pages/crypto-orders.init.js",
-        folder.src + "js/pages/crypto-transactions.init.js",
-        folder.src + "js/pages/crypto-wallet.init.js",
-        folder.src + "js/pages/dashboard-analytics.init.js",
-        folder.src + "js/pages/dashboard-crm.init.js",
-        folder.src + "js/pages/dashboard-crypto.init.js",
-        folder.src + "js/pages/dashboard-ecommerce.init.js",
-        folder.src + "js/pages/dashboard-projects.init.js",
-        folder.src + "js/pages/echarts.init.js",
-        folder.src + "js/pages/ecommerce-cart.init.js",
-        folder.src + "js/pages/ecommerce-order.init.js",
-        folder.src + "js/pages/ecommerce-customer-list.init.js",
-        folder.src + "js/pages/ecommerce-product-checkout.init.js",
-        folder.src + "js/pages/ecommerce-product-create.init.js",
-        folder.src + "js/pages/ecommerce-product-details.init.js",
-        folder.src + "js/pages/ecommerce-product-list.init.js",
-        folder.src + "js/pages/form-file-upload.init.js",
-        folder.src + "js/pages/form-input-spin.init.js",
-        folder.src + "js/pages/form-advanced.init.js",
-        folder.src + "js/pages/form-editor.init.js",
-        folder.src + "js/pages/form-masks.init.js",
-        folder.src + "js/pages/form-pickers.init.js",
-        folder.src + "js/pages/form-validation.init.js",
-        folder.src + "js/pages/form-wizard.init.js",
-        folder.src + "js/pages/gallery.init.js",
-        folder.src + "js/pages/gmaps.init.js",
-        folder.src + "js/pages/gridjs.init.js",
-        folder.src + "js/pages/invoicecreate.init.js",
-        folder.src + "js/pages/invoiceslist.init.js",
-        folder.src + "js/pages/leaflet-map.init.js",
-        folder.src + "js/pages/leaflet-us-states.js",
-        folder.src + "js/pages/listjs.init.js",
-        folder.src + "js/pages/mailbox.init.js",
-        folder.src + "js/pages/modal.init.js",
-        folder.src + "js/pages/materialdesign.list.js",
-        folder.src + "js/pages/notifications.init.js",
-        folder.src + "js/pages/nestable.init.js",
-        folder.src + "js/pages/particles.app.js",
-        folder.src + "js/pages/password-addon.init.js",
-        folder.src + "js/pages/pricing.init.js",
-        folder.src + "js/pages/profile-setting.init.js",
-        folder.src + "js/pages/profile.init.js",
-        folder.src + "js/pages/project-create.init.js",
-        folder.src + "js/pages/project-list.init.js",
-        folder.src + "js/pages/project-overview.init.js",
-        folder.src + "js/pages/range-sliders.init.js",
-        folder.src + "js/pages/rating.init.js",
-        folder.src + "js/pages/remix-icons-listing.js",
-        folder.src + "js/pages/search-result.init.js",
-        folder.src + "js/pages/seller-details.init.js",
-        folder.src + "js/pages/sellers.init.js",
-        folder.src + "js/pages/sweetalerts.init.js",
-        folder.src + "js/pages/swiper.init.js",
-        folder.src + "js/pages/tasks-kanban.init.js",
-        folder.src + "js/pages/tasks-list.init.js",
-        folder.src + "js/pages/team.init.js",
-        folder.src + "js/pages/ticketdetail.init.js",
-        folder.src + "js/pages/ticketlist.init.js",
-        folder.src + "js/pages/timeline.init.js",
-        folder.src + "js/pages/tour.init.js",
-        folder.src + "js/pages/two-step-verification.init.js",
-        folder.src + "js/pages/vector-maps.init.js",
-        folder.src + "js/pages/widgets.init.js",
-        folder.src + "js/pages/transaksi/resi.js",
+        {
+            'file': folder.src + "js/pages/transaksi/resi.js",
+            'dir': 'transaksi',
+        },
+        {
+            'file': folder.src + "js/pages/setting/user-picker.js",
+            'dir': 'setting',
+        },
+        
     ]
 };
 
 var out = folder.dist_assets + "js/";
 lodash(app_pages_assets).forEach(function(assets, type) {
     for (let i = 0; i < assets.length; ++i) {
-        mix.js(assets[i], out + "pages");
+        mix.js(assets[i].file, out + "pages/" + assets[i].dir);
     };
 });
 
 mix.combine('resources/js/plugins.js', folder.dist_assets + "js/plugins.min.js");
 mix.combine('resources/js/layout.js', folder.dist_assets + "js/layout.min.js");
 mix.combine('resources/js/bootstrap.js', folder.dist_assets + "js/bootstrap.min.js");
-mix.combine('resources/js/app.js', folder.dist_assets + "js/app.min.js");
-mix.combine('resources/js/pages/leaflet-us-states.js', folder.dist_assets + "js/pages/leaflet-us-states.js");
-mix.combine('resources/js/pages/form-wizard.init.js', folder.dist_assets + "js/pages/form-wizard.init.js");
-mix.combine('resources/js/pages/calendar.init.js', folder.dist_assets + "js/pages/calendar.init.js");
+mix.combine('resources/js/plugins/lord-icon.js', folder.dist_assets + "js/plugins/lord-icon.js");
