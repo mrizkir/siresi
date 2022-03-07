@@ -3,7 +3,7 @@
 @section('title') USER PICKER @endsection
 
 @section('page-title')
-USER PICKER
+  USER PICKER
 @endsection
 @section('page-breadcrumb')
 <li class="breadcrumb-item">
@@ -14,15 +14,20 @@ USER PICKER
 @section('page-content')
 <div class="row">
   <div class="col-lg-12">
-      <div class="card">
-          <div class="card-header">
-              <h4 class="card-title mb-0 flex-grow-1">Daftar User</h4>
-          </div><!-- end card header -->
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Daftar User</h4>
+        <div class="flex-shrink-0"> 
+            <a href="{!! route('userpicker.create') !!}">
+                <i class="mdi mdi-plus"></i>
+            </a>
+        </div>
+      </div><!-- end card header -->
 
-          <div class="card-body">
-              <div id="table-user-picker"></div>
-          </div><!-- end card-body -->
-      </div><!-- end card -->
+      <div class="card-body">
+        
+      </div><!-- end card-body -->
+    </div><!-- end card -->
   </div>
   <!-- end col -->
 </div>

@@ -86,12 +86,12 @@ class UserPickerController extends Controller
 		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_STORE');
 
     $breadcrumbs = [
-      ['link' => route('admin-dashboard.index'), 'name' => "HOME"], 			
+      ['link' => route('dashboard.index'), 'name' => "HOME"], 			
 			['name' => "PENGGUNA"],
       ['link' => route('userpicker.index'), 'name' => "PICKER"], 
       ['name' => "TAMBAH"], 			
     ];
-    return view('/admin/users/picker/picker-create', [
+    return view('/pages/setting/userpicker/userpicker-create', [
       'page_active'=>'users-picker',    
       'breadcrumbs'=>$breadcrumbs,      
     ]);
