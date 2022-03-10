@@ -12,3 +12,11 @@ $router->group(['prefix'=>'v1'], function () use ($router)
 	//untuk uifront
 	$router->get('/system/setting/uifront', ['uses'=>'System\UIController@frontend','as'=>'uifront.frontend']);
 });
+
+$router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($router)
+{
+	//authentication
+	$router->post('/auth/logout', ['uses'=>'AuthController@logout', 'as'=>'auth.logout']);
+	$router->get('/auth/refresh', ['uses'=>'AuthController@refresh', 'as'=>'auth.refresh']);
+	$router->get('/auth/me', ['uses'=>'AuthController@me', 'as'=>'auth.me']);
+});
