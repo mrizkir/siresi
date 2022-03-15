@@ -46,21 +46,17 @@ $app->singleton(
 $app->configure('app');
 $app->configure('permission');
 $app->configure('jwt');
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
 |--------------------------------------------------------------------------
-|
-| Next, we will register the middleware with the application. These can
-| be global middleware that run before and after each request into a
-| route or middleware that'll be assigned to some specific routes.
-|
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    Fruitcake\Cors\HandleCors::class,
+]);
 
 $app->routeMiddleware([
   'auth' => App\Http\Middleware\Authenticate::class,
@@ -79,6 +75,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(PHPOpenSourceSaver\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
