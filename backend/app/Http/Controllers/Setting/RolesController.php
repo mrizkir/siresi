@@ -17,7 +17,7 @@ class RolesController extends Controller {
    */
   public function index(Request $request)
   {   
-    // $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_BROWSE');
+    $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_BROWSE');
 
     $data = Role::all();
     return Response()->json([
@@ -35,7 +35,7 @@ class RolesController extends Controller {
    */
   public function store(Request $request)
   {
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_STORE');
+      $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_STORE');
 
       $this->validate($request, [
           'name'=>'required|unique:roles',
@@ -65,7 +65,7 @@ class RolesController extends Controller {
    */
   public function storerolepermissions(Request $request)
   {      
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_STORE');
+      $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_STORE');
 
       $post = $request->all();
       $permissions = isset($post['chkpermission'])?$post['chkpermission']:[];
@@ -92,7 +92,7 @@ class RolesController extends Controller {
    */
   public function revokerolepermissions(Request $request)
   {      
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_DESTROY');
+      $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_DESTROY');
 
       $role = \DB::transaction(function () use ($request) {
           $post = $request->all();
@@ -126,7 +126,7 @@ class RolesController extends Controller {
    */
   public function rolepermissions($id)
   {
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_SHOW');
+      $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_SHOW');
       $role=Role::findByID($id);
       if (is_null($role))
       {
@@ -154,7 +154,7 @@ class RolesController extends Controller {
    */
   public function rolepermissionsbyname($id)
   {
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_SHOW');
+      $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_SHOW');
 
       $role=Role::findByName($id);
       if (is_null($role))
@@ -184,27 +184,27 @@ class RolesController extends Controller {
    */
   public function update(Request $request, $id)
   {
-    //   $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_UPDATE');
+    $this->hasPermissionTo('SETTING-PENGGUNA-ROLES_UPDATE');
 
-      $role = Role::find($id);
+    $role = Role::find($id);
 
-      $this->validate($request, [                                
-          'name'=>[
-              'required',
-              Rule::unique('roles')->ignore($role->name,'name')
-          ],                     
-      ],[
-          'name.required'=>'Nama role mohon untuk di isi',
-      ]);        
-      
-      $role->name = $request->input('name');
-      $role->save();
+    $this->validate($request, [                                
+        'name'=>[
+            'required',
+            Rule::unique('roles')->ignore($role->name,'name')
+        ],                     
+    ],[
+        'name.required'=>'Nama role mohon untuk di isi',
+    ]);        
+    
+    $role->name = $request->input('name');
+    $role->save();
 
-      return Response()->json([
-                                  'status'=>1,
-                                  'pid'=>'update',
-                                  'role'=>$role,                                    
-                                  'message'=>'Data role '.$role->name.' berhasil diubah.'
-                              ], 200); 
+    return Response()->json([
+      'status'=>1,
+      'pid'=>'update',
+      'role'=>$role,                                    
+      'message'=>'Data role '.$role->name.' berhasil diubah.'
+    ], 200); 
   }
 }

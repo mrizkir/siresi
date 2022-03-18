@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Validation\Rule;
 
-class UserAdminController extends Controller 
+class UserPickerController extends Controller 
 {         
 	/**
 	 * Show the form for creating a new resource.
@@ -19,19 +19,19 @@ class UserAdminController extends Controller
 	 */
 	public function index(Request $request)
 	{           
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_BROWSE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_BROWSE');
 
-		$data = User::where('default_role','admin')
+		$data = User::where('default_role','picker')
 					->orderBy('username','ASC')
 					->get();       
 					
-		$role = Role::findByName('admin');
+		$role = Role::findByName('picker');
 		return Response()->json([
 								'status'=>1,
 								'pid'=>'fetchdata',
 								'role'=>$role,
 								'users'=>$data,
-								'message'=>'Fetch data pengguna admin berhasil diperoleh'
+								'message'=>'Fetch data pengguna picker berhasil diperoleh'
 							], 200);  
 	}    
 	/**
@@ -42,7 +42,7 @@ class UserAdminController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_STORE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_STORE');
 
 		$this->validate($request, [
 			'name'=>'required',
@@ -61,17 +61,17 @@ class UserAdminController extends Controller
 				'username'=> $request->input('username'),
 				'password'=>Hash::make($request->input('password')),                        
 				'theme'=>'default',
-				'default_role'=>'admin',            
+				'default_role'=>'picker',            
 				'foto'=> 'storages/images/users/no_photo.png',
 				'created_at'=>$now, 
 				'updated_at'=>$now
 			]);            
-			$role='admin';   
+			$role='picker';   
 			$user->assignRole($role);               
 			
-			$permission=Role::findByName('admin')->permissions;
+			$permission=Role::findByName('picker')->permissions;
 			$permissions=$permission->pluck('name');
-			$user->givePermissionTo($permissions);
+			$user->givePermissionTo($permissions);			
 
 			return $user;
 		});
@@ -80,7 +80,7 @@ class UserAdminController extends Controller
 									'status'=>1,
 									'pid'=>'store',
 									'user'=>$user,                                    
-									'message'=>'Data user admin berhasil disimpan.'
+									'message'=>'Data user picker berhasil disimpan.'
 								], 200); 
 
 	}
@@ -89,7 +89,7 @@ class UserAdminController extends Controller
 	 */
 	public function show(Request $request, $id)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_SHOW');
+		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_SHOW');
 
 		$user = User::find($id);
 		if (is_null($user))
@@ -106,7 +106,7 @@ class UserAdminController extends Controller
 									'status'=>1,
 									'pid'=>'fetchdata',
 									'user'=>$user,  
-									'role_admin'=>$user->hasRole('admin'),    
+									'role_picker'=>$user->hasRole('picker'),    
 									'message'=>'Data user '.$user->username.' berhasil diperoleh.'
 								], 200); 
 		}
@@ -121,7 +121,7 @@ class UserAdminController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_UPDATE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_UPDATE');
 
 		$user = User::find($id);
 		if (is_null($user))
@@ -158,11 +158,11 @@ class UserAdminController extends Controller
 			});
 
 			return Response()->json([
-				'status'=>1,
-				'pid'=>'update',
-				'user'=>$user,      
-				'message'=>'Data user admin '.$user->username.' berhasil diubah.'
-			], 200); 
+									'status'=>1,
+									'pid'=>'update',
+									'user'=>$user,      
+									'message'=>'Data user picker '.$user->username.' berhasil diubah.'
+								], 200); 
 		}
 	}
 	/**
@@ -173,7 +173,7 @@ class UserAdminController extends Controller
 	 */
 	public function destroy(Request $request,$id)
 	{ 
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_DESTROY');
+		$this->hasPermissionTo('SETTING-PENGGUNA-PICKER_DESTROY');
 
 		$user = User::where('isdeleted','1')
 					->find($id); 
@@ -193,10 +193,10 @@ class UserAdminController extends Controller
 			
 		
 			return Response()->json([
-										'status'=>1,
-										'pid'=>'destroy',                
-										'message'=>"User admin ($username) berhasil dihapus"
-									], 200);         
+        'status'=>1,
+        'pid'=>'destroy',                
+        'message'=>"User picker ($username) berhasil dihapus"
+      ], 200);         
 		}
 				  
 	}

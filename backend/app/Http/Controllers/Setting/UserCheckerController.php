@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Validation\Rule;
 
-class UserAdminController extends Controller 
+class UserCheckerController extends Controller 
 {         
 	/**
 	 * Show the form for creating a new resource.
@@ -19,19 +19,19 @@ class UserAdminController extends Controller
 	 */
 	public function index(Request $request)
 	{           
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_BROWSE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-CHECKER_BROWSE');
 
-		$data = User::where('default_role','admin')
+		$data = User::where('default_role','checker')
 					->orderBy('username','ASC')
 					->get();       
 					
-		$role = Role::findByName('admin');
+		$role = Role::findByName('checker');
 		return Response()->json([
 								'status'=>1,
 								'pid'=>'fetchdata',
 								'role'=>$role,
 								'users'=>$data,
-								'message'=>'Fetch data pengguna admin berhasil diperoleh'
+								'message'=>'Fetch data pengguna checker berhasil diperoleh'
 							], 200);  
 	}    
 	/**
@@ -42,7 +42,7 @@ class UserAdminController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_STORE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-CHECKER_STORE');
 
 		$this->validate($request, [
 			'name'=>'required',
@@ -61,17 +61,17 @@ class UserAdminController extends Controller
 				'username'=> $request->input('username'),
 				'password'=>Hash::make($request->input('password')),                        
 				'theme'=>'default',
-				'default_role'=>'admin',            
+				'default_role'=>'checker',            
 				'foto'=> 'storages/images/users/no_photo.png',
 				'created_at'=>$now, 
 				'updated_at'=>$now
 			]);            
-			$role='admin';   
+			$role='checker';   
 			$user->assignRole($role);               
 			
-			$permission=Role::findByName('admin')->permissions;
+			$permission=Role::findByName('checker')->permissions;
 			$permissions=$permission->pluck('name');
-			$user->givePermissionTo($permissions);
+			$user->givePermissionTo($permissions);			
 
 			return $user;
 		});
@@ -80,7 +80,7 @@ class UserAdminController extends Controller
 									'status'=>1,
 									'pid'=>'store',
 									'user'=>$user,                                    
-									'message'=>'Data user admin berhasil disimpan.'
+									'message'=>'Data user checker berhasil disimpan.'
 								], 200); 
 
 	}
@@ -89,7 +89,7 @@ class UserAdminController extends Controller
 	 */
 	public function show(Request $request, $id)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_SHOW');
+		$this->hasPermissionTo('SETTING-PENGGUNA-CHECKER_SHOW');
 
 		$user = User::find($id);
 		if (is_null($user))
@@ -106,7 +106,7 @@ class UserAdminController extends Controller
 									'status'=>1,
 									'pid'=>'fetchdata',
 									'user'=>$user,  
-									'role_admin'=>$user->hasRole('admin'),    
+									'role_checker'=>$user->hasRole('checker'),    
 									'message'=>'Data user '.$user->username.' berhasil diperoleh.'
 								], 200); 
 		}
@@ -121,7 +121,7 @@ class UserAdminController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_UPDATE');
+		$this->hasPermissionTo('SETTING-PENGGUNA-CHECKER_UPDATE');
 
 		$user = User::find($id);
 		if (is_null($user))
@@ -158,11 +158,11 @@ class UserAdminController extends Controller
 			});
 
 			return Response()->json([
-				'status'=>1,
-				'pid'=>'update',
-				'user'=>$user,      
-				'message'=>'Data user admin '.$user->username.' berhasil diubah.'
-			], 200); 
+									'status'=>1,
+									'pid'=>'update',
+									'user'=>$user,      
+									'message'=>'Data user checker '.$user->username.' berhasil diubah.'
+								], 200); 
 		}
 	}
 	/**
@@ -173,7 +173,7 @@ class UserAdminController extends Controller
 	 */
 	public function destroy(Request $request,$id)
 	{ 
-		$this->hasPermissionTo('SETTING-PENGGUNA-ADMIN_DESTROY');
+		$this->hasPermissionTo('SETTING-PENGGUNA-CHECKER_DESTROY');
 
 		$user = User::where('isdeleted','1')
 					->find($id); 
@@ -195,7 +195,7 @@ class UserAdminController extends Controller
 			return Response()->json([
 										'status'=>1,
 										'pid'=>'destroy',                
-										'message'=>"User admin ($username) berhasil dihapus"
+										'message'=>"User checker ($username) berhasil dihapus"
 									], 200);         
 		}
 				  

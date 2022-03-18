@@ -217,7 +217,7 @@
 			initialize() {
 				this.datatableLoading = true;
 				this.$ajax
-					.get("/setting/setting/permissions", {
+					.get("/setting/pengguna/permissions", {
 						headers: {
 							Authorization: this.TOKEN,
 						},
@@ -254,7 +254,7 @@
 						this.btnLoading = true;
 						this.$ajax
 							.post(
-								"/setting/setting/permissions/store",
+								"/setting/pengguna/permissions/store",
 								{
 									name: this.editedItem.name.toLowerCase(),
 								},
@@ -286,7 +286,7 @@
 							this.btnLoading = true;
 							this.$ajax
 								.post(
-									"/setting/setting/permissions/" + item.id,
+									"/setting/pengguna/permissions/" + item.id,
 									{
 										_method: "DELETE",
 									},

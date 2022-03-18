@@ -44,7 +44,7 @@ const routes = [
 	},
   {
 		path: "/setting/pengguna/admin",
-		name: "UserSuperadmin",
+		name: "UserAdmin",
 		meta: {
 			title: "PENGGUNA - ADMIN",
 			requiresAuth: true,
@@ -53,7 +53,7 @@ const routes = [
 	},
 	{
 		path: "/setting/pengguna/picker",
-		name: "UserBapelitbang",
+		name: "UserPicker",
 		meta: {
 			title: "PENGGUNA - PICKER",
 			requiresAuth: true,
@@ -62,16 +62,16 @@ const routes = [
 	},
 	{
 		path: "/setting/pengguna/checker",
-		name: "UserOPD",
+		name: "UserChecker",
 		meta: {
 			title: "PENGGUNA - CHECKER",
 			requiresAuth: true,
 		},
-		component: () => import("../views/pages/admin/setting/UserPicker.vue"),
+		component: () => import("../views/pages/admin/setting/UserChecker.vue"),
 	},
 	{
 		path: "/setting/pengguna/handoffer",
-		name: "UserUnitKerja",
+		name: "UserHandoffer",
 		meta: {
 			title: "PENGGUNA - HANDOFFER",
 			requiresAuth: true,

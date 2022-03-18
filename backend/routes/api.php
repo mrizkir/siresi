@@ -57,6 +57,24 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->post('/setting/pengguna/admin/store',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserAdminController@store','as'=>'useradmin.store']);
 	$router->put('/setting/pengguna/admin/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserAdminController@update','as'=>'useradmin.update']);    
 	$router->delete('/setting/pengguna/admin/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserAdminController@destroy','as'=>'useradmin.destroy']);
+	
+	//setting - pengguna - picker
+	$router->get('/setting/pengguna/picker',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@index','as'=>'userpicker.index']);
+	$router->post('/setting/pengguna/picker/store',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@store','as'=>'userpicker.store']);
+	$router->put('/setting/pengguna/picker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@update','as'=>'userpicker.update']);    
+	$router->delete('/setting/pengguna/picker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@destroy','as'=>'userpicker.destroy']);
+	
+	//setting - pengguna - checker
+	$router->get('/setting/pengguna/checker',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserCheckerController@index','as'=>'userchecker.index']);
+	$router->post('/setting/pengguna/checker/store',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserCheckerController@store','as'=>'userchecker.store']);
+	$router->put('/setting/pengguna/checker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserCheckerController@update','as'=>'userchecker.update']);    
+	$router->delete('/setting/pengguna/checker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserCheckerController@destroy','as'=>'userchecker.destroy']);
+	
+	//setting - pengguna - hand offer
+	$router->get('/setting/pengguna/handoffer',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserHandOfferController@index','as'=>'handoffer.index']);
+	$router->post('/setting/pengguna/handoffer/store',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserHandOfferController@store','as'=>'handoffer.store']);
+	$router->put('/setting/pengguna/handoffer/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserHandOfferController@update','as'=>'handoffer.update']);    
+	$router->delete('/setting/pengguna/handoffer/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserHandOfferController@destroy','as'=>'handoffer.destroy']);
 
 
 });

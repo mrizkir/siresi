@@ -144,17 +144,7 @@
 													:rules="rule_user_password"
 													filled
 												>
-												</v-text-field>
-												<v-autocomplete
-													:items="daftar_roles"
-													v-model="editedItem.role_id"
-													label="ROLES"
-													multiple
-													small-chips
-													outlined
-													filled
-												>
-												</v-autocomplete>
+												</v-text-field>												
 											</v-card-text>
 											<v-card-actions>
 												<v-spacer></v-spacer>
@@ -220,17 +210,7 @@
 													:rules="rule_user_passwordEdit"
 													filled
 												>
-												</v-text-field>
-												<v-autocomplete
-													:items="daftar_roles"
-													v-model="editedItem.role_id"
-													label="ROLES"
-													multiple
-													small-chips
-													outlined
-													filled
-												>
-												</v-autocomplete>
+												</v-text-field>												
 											</v-card-text>
 											<v-card-actions>
 												<v-spacer></v-spacer>
@@ -381,8 +361,7 @@
 			search: "",
 			daftar_users: [],
 			//form
-			form_valid: true,
-			daftar_roles: [],
+			form_valid: true,			
 			dialog: false,
 			dialogEdit: false,
 			dialogUserPermission: false,
@@ -501,61 +480,12 @@
 					});
 			},
 			showDialogTambahUserAdmin: async function() {
-				await this.$ajax
-					.get("/setting/pengguna/roles", {
-						headers: {
-							Authorization: this.TOKEN,
-						},
-					})
-					.then(({ data }) => {
-						let roles = data.roles;
-						var daftar_roles = [];
-						roles.forEach(element => {
-							if (element.name == "admin") {
-								daftar_roles.push({
-									text: element.name,
-									disabled: true,
-								});
-							} else if (element.name == "checker" || element.name == "handoffer") {
-								daftar_roles.push({
-									text: element.name,
-									disabled: false,
-								});
-							}
-						});
-						this.daftar_roles = daftar_roles;
-						this.dialog = true;
-					});
+				this.dialog = true;				
 			},
 			editItem: async function(item) {
 				this.editedIndex = this.daftar_users.indexOf(item);
 				item.password = "";
-				this.editedItem = Object.assign({}, item);
-
-				await this.$ajax
-					.get("/setting/pengguna/roles", {
-						headers: {
-							Authorization: this.TOKEN,
-						},
-					})
-					.then(({ data }) => {
-						let roles = data.roles;
-						var daftar_roles = [];
-						roles.forEach(element => {
-							if (element.name == "admin") {
-								daftar_roles.push({
-									text: element.name,
-									disabled: true,
-								});
-							} else if (element.name == "checker" || element.name == "handoffer") {
-								daftar_roles.push({
-									text: element.name,
-									disabled: false,
-								});
-							}
-						});
-						this.daftar_roles = daftar_roles;
-					});
+				this.editedItem = Object.assign({}, item);				
 
 				this.btnLoading = true;
 				await this.$ajax
