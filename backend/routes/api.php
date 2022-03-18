@@ -36,17 +36,17 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->get('/setting/pengguna/rolesbyname/{id}/permission',['middleware'=>['role:superadmin'],'uses'=>'Setting\RolesController@rolepermissionsbyname','as'=>'roles.permissionbyname']);
 
 	//setting - user
-	// $router->get('/setting/users',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@index','as'=>'users.index']);
-	// $router->post('/setting/users/store',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@store','as'=>'users.store']);
-	// $router->put('/setting/users/updatepassword/{id}',['uses'=>'Setting\UsersController@updatepassword','as'=>'users.updatepassword']);
-	// $router->post('/setting/users/uploadfoto/{id}',['uses'=>'Setting\UsersController@uploadfoto','as'=>'users.uploadfoto']);
-	// $router->post('/setting/users/resetfoto/{id}',['uses'=>'Setting\UsersController@resetfoto','as'=>'users.resetfoto']);
+	$router->get('/setting/users',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@index','as'=>'users.index']);
+	$router->post('/setting/users/store',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@store','as'=>'users.store']);
+	$router->put('/setting/users/updatepassword/{id}',['uses'=>'Setting\UsersController@updatepassword','as'=>'users.updatepassword']);
+	$router->post('/setting/users/uploadfoto/{id}',['uses'=>'Setting\UsersController@uploadfoto','as'=>'users.uploadfoto']);
+	$router->post('/setting/users/resetfoto/{id}',['uses'=>'Setting\UsersController@resetfoto','as'=>'users.resetfoto']);
 	$router->post('/setting/users/syncallpermissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@syncallpermissions','as'=>'users.syncallpermissions']);
-	// $router->post('/setting/users/storeuserpermissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@storeuserpermissions','as'=>'users.storeuserpermissions']);
-	// $router->post('/setting/users/revokeuserpermissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@revokeuserpermissions','as'=>'users.revokeuserpermissions']);
-	// $router->put('/setting/users/{id}',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@update','as'=>'users.update']);
-	// $router->get('/setting/users/{id}',['uses'=>'Setting\UsersController@show','as'=>'users.show']);
-	// $router->delete('/setting/users/{id}',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@destroy','as'=>'users.destroy']);
+	$router->post('/setting/users/storeuserpermissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@storeuserpermissions','as'=>'users.storeuserpermissions']);
+	$router->post('/setting/users/revokeuserpermissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@revokeuserpermissions','as'=>'users.revokeuserpermissions']);
+	$router->put('/setting/users/{id}',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@update','as'=>'users.update']);
+	$router->get('/setting/users/{id}',['uses'=>'Setting\UsersController@show','as'=>'users.show']);
+	$router->delete('/setting/users/{id}',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@destroy','as'=>'users.destroy']);
 	//lokasi method userpermission ada di file UsersController
 	$router->get('/setting/users/{id}/permission',['middleware'=>['role:superadmin'],'uses'=>'Setting\UsersController@userpermissions','as'=>'users.permission']);
 	$router->get('/setting/users/{id}/mypermission',['uses'=>'Setting\UsersController@mypermission','as'=>'users.mypermission']);	

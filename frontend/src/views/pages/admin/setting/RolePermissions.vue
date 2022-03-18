@@ -149,7 +149,7 @@
 				this.btnLoading = true;
 				this.$ajax
 					.post(
-						"/setting/setting/roles/storerolepermissions",
+						"/setting/pengguna/roles/storerolepermissions",
 						{
 							role_id: this.role.id,
 							chkpermission: this.permissions_selected,
@@ -172,7 +172,7 @@
 				this.btnLoading = true;
 				this.$ajax
 					.post(
-						"/setting/setting/roles/revokerolepermissions",
+						"/setting/pengguna/roles/revokerolepermissions",
 						{
 							role_id: this.role.id,
 							name: item.name,
