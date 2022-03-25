@@ -20,6 +20,11 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->get('/auth/refresh', ['uses'=>'AuthController@refresh', 'as'=>'auth.refresh']);
 	$router->get('/auth/me', ['uses'=>'AuthController@me', 'as'=>'auth.me']);
 
+	//transaksi - scan resi
+
+	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
+	$router->post('/transaksi/resi/picker',['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
+
 	//setting - permissions
 	$router->get('/setting/pengguna/permissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\PermissionsController@index','as'=>'permissions.index']);
 	$router->post('/setting/pengguna/permissions/store',['middleware'=>['role:superadmin'],'uses'=>'Setting\PermissionsController@store','as'=>'permissions.store']);
@@ -59,7 +64,7 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->delete('/setting/pengguna/admin/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserAdminController@destroy','as'=>'useradmin.destroy']);
 	
 	//setting - pengguna - picker
-	$router->get('/setting/pengguna/picker',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@index','as'=>'userpicker.index']);
+	$router->get('/setting/pengguna/picker',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@index','as'=>'userpicker.index']);	
 	$router->post('/setting/pengguna/picker/store',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@store','as'=>'userpicker.store']);
 	$router->put('/setting/pengguna/picker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@update','as'=>'userpicker.update']);    
 	$router->delete('/setting/pengguna/picker/{id}',['middleware'=>['role:superadmin|admin'],'uses'=>'Setting\UserPickerController@destroy','as'=>'userpicker.destroy']);

@@ -10,75 +10,86 @@ const routes = [
     path: '/',
     name: 'FrontDashboard',
     meta: {
-      title: 'LOGIN'
+      title: 'LOGIN',
     },
-    component: () => import('../views/pages/front/Login.vue')
+    component: () => import('../views/pages/front/Login.vue'),
   },
   {
-		path: "/dashboard/:token",
-		name: "DashboardAdmin",
-		meta: {
-			title: "DASHBOARD",
-		},
-		component: () => import("../views/pages/admin/DashboardAdmin.vue"),
-	},
+    path: '/dashboard/:token',
+    name: 'DashboardAdmin',
+    meta: {
+      title: 'DASHBOARD',
+    },
+    component: () => import('../views/pages/admin/DashboardAdmin.vue'),
+  },
+
+  // transaksi  - scan resi
+  {
+    path: '/transaksi/scanresi',
+    name: 'TransaksiScanResi',
+    meta: {
+      title: 'TRANSAKSI - SCAN RESI',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiScanResi.vue'),
+  },
 
   // setting  - pengguna
-	{
-		path: "/setting/pengguna/permissions",
-		name: "UserPermissions",
-		meta: {
-			title: "PENGGUNA - PERMISSIONS",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/Permissions.vue"),
-	},
-	{
-		path: "/setting/pengguna/roles",
-		name: "UsesRoles",
-		meta: {
-			title: "PENGGUNA - ROLES",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/Roles.vue"),
-	},
   {
-		path: "/setting/pengguna/admin",
-		name: "UserAdmin",
-		meta: {
-			title: "PENGGUNA - ADMIN",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/UserAdmin.vue"),
-	},
-	{
-		path: "/setting/pengguna/picker",
-		name: "UserPicker",
-		meta: {
-			title: "PENGGUNA - PICKER",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/UserPicker.vue"),
-	},
-	{
-		path: "/setting/pengguna/checker",
-		name: "UserChecker",
-		meta: {
-			title: "PENGGUNA - CHECKER",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/UserChecker.vue"),
-	},
-	{
-		path: "/setting/pengguna/handoffer",
-		name: "UserHandoffer",
-		meta: {
-			title: "PENGGUNA - HANDOFFER",
-			requiresAuth: true,
-		},
-		component: () => import("../views/pages/admin/setting/UserHandoffer.vue"),
-	},
-	
+    path: '/setting/pengguna/permissions',
+    name: 'UserPermissions',
+    meta: {
+      title: 'PENGGUNA - PERMISSIONS',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/Permissions.vue'),
+  },
+  {
+    path: '/setting/pengguna/roles',
+    name: 'UsesRoles',
+    meta: {
+      title: 'PENGGUNA - ROLES',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/Roles.vue'),
+  },
+  {
+    path: '/setting/pengguna/admin',
+    name: 'UserAdmin',
+    meta: {
+      title: 'PENGGUNA - ADMIN',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/UserAdmin.vue'),
+  },
+  {
+    path: '/setting/pengguna/picker',
+    name: 'UserPicker',
+    meta: {
+      title: 'PENGGUNA - PICKER',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/UserPicker.vue'),
+  },
+  {
+    path: '/setting/pengguna/checker',
+    name: 'UserChecker',
+    meta: {
+      title: 'PENGGUNA - CHECKER',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/UserChecker.vue'),
+  },
+  {
+    path: '/setting/pengguna/handoffer',
+    name: 'UserHandoffer',
+    meta: {
+      title: 'PENGGUNA - HANDOFFER',
+      requiresAuth: true,
+    },
+    component: () => import('../views/pages/admin/setting/UserHandoffer.vue'),
+  },
   {
     path: '/404',
     name: 'NotFoundComponent',
@@ -96,12 +107,12 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.getters['auth/Authenticated']) {
       next()
       return

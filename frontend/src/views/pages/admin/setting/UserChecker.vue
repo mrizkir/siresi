@@ -317,28 +317,28 @@
   </AdminLayout>
 </template>
 <script>
-  import { mapGetters } from "vuex";
-  import AdminLayout from "@/views/layouts/AdminLayout";
-  import ModuleHeader from "@/components/ModuleHeader";
-  import UserPermissions from "@/views/pages/admin/setting/UserPermissions";
+  import { mapGetters } from 'vuex';
+  import AdminLayout from '@/views/layouts/AdminLayout';
+  import ModuleHeader from '@/components/ModuleHeader';
+  import UserPermissions from '@/views/pages/admin/setting/UserPermissions';
   export default {
-    name: "UserChecker",
+    name: 'UserChecker',
     created() {
       this.breadcrumbs = [
         {
-          text: "HOME",
+          text: 'HOME',
           disabled: false,
-          href: "/dashboard/" + this.ACCESS_TOKEN,
+          href: '/dashboard/' + this.ACCESS_TOKEN,
         },
         {
-          text: "PENGGUNA",
+          text: 'PENGGUNA',
           disabled: true,
-          href: "#",
+          href: '#',
         },
         {
-          text: "USERS CHECKER",
+          text: 'USERS CHECKER',
           disabled: true,
-          href: "#",
+          href: '#',
         },
       ];
       this.initialize();
@@ -350,15 +350,15 @@
       btnLoading: false,
       //tables
       headers: [
-        { text: "", value: "foto" },
-        { text: "USERNAME", value: "username", sortable: true },
-        { text: "NAME", value: "name", sortable: true },
-        { text: "EMAIL", value: "email", sortable: true },
-        { text: "NOMOR HP", value: "nomor_hp", sortable: true },
-        { text: "AKSI", value: "actions", sortable: false, width: 120 },
+        { text: '', value: 'foto' },
+        { text: 'USERNAME', value: 'username', sortable: true },
+        { text: 'NAME', value: 'name', sortable: true },
+        { text: 'EMAIL', value: 'email', sortable: true },
+        { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
+        { text: 'AKSI', value: 'actions', sortable: false, width: 120 },
       ],
       expanded: [],
-      search: "",
+      search: '',
       daftar_users: [],
       //form
       form_valid: true,			
@@ -368,49 +368,49 @@
       editedIndex: -1,
       editedItem: {
         id: 0,
-        username: "",
-        password: "",
-        name: "",
-        email: "",
-        nomor_hp: "",
-        role_id: ["checker"],
-        created_at: "",
-        updated_at: "",
+        username: '',
+        password: '',
+        name: '',
+        email: '',
+        nomor_hp: '',
+        role_id: ['checker'],
+        created_at: '',
+        updated_at: '',
       },
       defaultItem: {
         id: 0,
-        username: "",
-        password: "",
-        name: "",
-        email: "",
-        nomor_hp: "",
-        role_id: ["checker"],
-        created_at: "",
-        updated_at: "",
+        username: '',
+        password: '',
+        name: '',
+        email: '',
+        nomor_hp: '',
+        role_id: ['checker'],
+        created_at: '',
+        updated_at: '',
       },
       //form rules
-      rule_user_name: [value => !!value || "Mohon untuk di isi nama User !!!"],
+      rule_user_name: [value => !!value || 'Mohon untuk di isi nama User !!!'],
       rule_user_email: [
-        value => !!value || "Mohon untuk di isi email User !!!",
-        value => /.+@.+\..+/.test(value) || "Format E-mail harus benar",
+        value => !!value || 'Mohon untuk di isi email User !!!',
+        value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',
       ],
       rule_user_nomorhp: [
-        value => !!value || "Nomor HP mohon untuk diisi !!!",
+        value => !!value || 'Nomor HP mohon untuk diisi !!!',
         value =>
           /^\+[1-9]{1}[0-9]{1,14}$/.test(value) ||
-          "Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388",
+          'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
       ],
       rule_user_username: [
-        value => !!value || "Mohon untuk di isi username User !!!",
+        value => !!value || 'Mohon untuk di isi username User !!!',
         value =>
           /^[A-Za-z_]*$/.test(value) ||
-          "Username hanya boleh string dan underscore",
+          'Username hanya boleh string dan underscore',
       ],
       rule_user_password: [
-        value => !!value || "Mohon untuk di isi password User !!!",
+        value => !!value || 'Mohon untuk di isi password User !!!',
         value => {
-          if (value && typeof value !== "undefined" && value.length > 0) {
-            return value.length >= 8 || "Minimial Password 8 Karakter";
+          if (value && typeof value !== 'undefined' && value.length > 0) {
+            return value.length >= 8 || 'Minimial Password 8 Karakter';
           } else {
             return true;
           }
@@ -418,8 +418,8 @@
       ],
       rule_user_passwordEdit: [
         value => {
-          if (value && typeof value !== "undefined" && value.length > 0) {
-            return value.length >= 8 || "Minimial Password 8 Karakter";
+          if (value && typeof value !== 'undefined' && value.length > 0) {
+            return value.length >= 8 || 'Minimial Password 8 Karakter';
           } else {
             return true;
           }
@@ -430,13 +430,13 @@
       initialize: async function() {
         this.datatableLoading = true;
         await this.$ajax
-          .get("/setting/pengguna/checker", {
+          .get('/setting/pengguna/checker', {
             headers: {
               Authorization: this.TOKEN,
             },
           })
           .then(({ data }) => {
-            this.daftar_users = data.users;
+            this.daftar_users = data.users
             this.role_id = data.role.id;
             this.datatableLoading = false;
           });
@@ -451,22 +451,22 @@
       syncPermission() {
         this.$root.$confirm
           .open(
-            "Konfirmasi Sinkronisasi",
-            "Sinkronisasi hanya untuk user dalam role checker, bila user memiliki role lain akan terhapus permission-nya ?",
-            { color: "warning", width: 500 }
+            'Konfirmasi Sinkronisasi',
+            'Sinkronisasi hanya untuk user dalam role checker, bila user memiliki role lain akan terhapus permission-nya ?',
+            { color: 'warning', width: 500 }
           )
           .then(async confirm => {
             if (confirm) {
               this.btnLoading = true;
               await this.$ajax
                 .post(
-                  "/setting/users/syncallpermissions",
+                  '/setting/users/syncallpermissions',
                   {
-                    role_name: "checker",
+                    role_name: 'checker',
                   },
                   {
                     headers: {
-                      Authorization: this.$store.getters["auth/Token"],
+                      Authorization: this.$store.getters['auth/Token'],
                     },
                   }
                 )
@@ -484,12 +484,12 @@
       },
       editItem: async function(item) {
         this.editedIndex = this.daftar_users.indexOf(item);
-        item.password = "";
+        item.password = '';
         this.editedItem = Object.assign({}, item);       
 
         this.btnLoading = true;
         await this.$ajax
-          .get("/setting/users/" + item.id + "/roles", {
+          .get('/setting/users/' + item.id + '/roles', {
             headers: {
               Authorization: this.TOKEN,
             },
@@ -524,9 +524,9 @@
           if (this.editedIndex > -1) {
             this.$ajax
               .post(
-                "/setting/pengguna/checker/" + this.editedItem.id,
+                '/setting/pengguna/checker/' + this.editedItem.id,
                 {
-                  _method: "PUT",
+                  _method: 'PUT',
                   name: this.editedItem.name,
                   email: this.editedItem.email,
                   nomor_hp: this.editedItem.nomor_hp,
@@ -549,7 +549,7 @@
           } else {
             this.$ajax
               .post(
-                "/setting/pengguna/checker/store",
+                '/setting/pengguna/checker/store',
                 {
                   name: this.editedItem.name,
                   email: this.editedItem.email,
@@ -576,18 +576,18 @@
       deleteItem(item) {
         this.$root.$confirm
           .open(
-            "Delete",
-            "Apakah Anda ingin menghapus username " + item.username + " ?",
-            { color: "red" }
+            'Delete',
+            'Apakah Anda ingin menghapus username ' + item.username + ' ?',
+            { color: 'red' }
           )
           .then(confirm => {
             if (confirm) {
               this.btnLoading = true;
               this.$ajax
                 .post(
-                  "/setting/pengguna/checker/" + item.id,
+                  '/setting/pengguna/checker/' + item.id,
                   {
-                    _method: "DELETE",
+                    _method: 'DELETE',
                   },
                   {
                     headers: {
@@ -610,12 +610,12 @@
     computed: {
       formTitle() {
         return this.editedIndex === -1
-          ? "TAMBAH USER CHECKER"
-          : "EDIT USER CHECKER";
+          ? 'TAMBAH USER CHECKER'
+          : 'EDIT USER CHECKER';
       },
-      ...mapGetters("auth", {
-        ACCESS_TOKEN: "AccessToken",
-        TOKEN: "Token",
+      ...mapGetters('auth', {
+        ACCESS_TOKEN: 'AccessToken',
+        TOKEN: 'Token',
       }),
     },
     watch: {

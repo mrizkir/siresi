@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-system-bar
-      app
-      dark
-      class="black lighten-2 white--text"
-    >
+    <v-system-bar app dark class="black lighten-2 white--text">
       <v-spacer></v-spacer>
       <strong>Hak Akses Sebagai:</strong> {{ ROLE }}			
     </v-system-bar>
@@ -102,7 +98,7 @@
       </v-list-item>
       <v-list-item
         :to="{ path: '/dashboard/' + ACCESS_TOKEN }"
-        v-if="CAN_ACCESS('RENJA-GROUP')"
+        v-if="CAN_ACCESS('DASHBOARD_SHOW')"
         link
         active-class="purple accent-1"
         color="purple"
@@ -114,7 +110,22 @@
           <v-list-item-title>DASHBOARD</v-list-item-title>
         </v-list-item-content>
       </v-list-item>						
-      <v-subheader class="purple accent-5 white--text">SETTING</v-subheader>
+      <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('TRANSAKSI-GROUP')">TRANSAKSI</v-subheader>
+      <v-list-item
+        :to="{ path: '/transaksi/scanresi' }"
+        v-if="CAN_ACCESS('TRANSAKSI-RESI_BROWSE')"
+        link
+        active-class="purple accent-1"
+        color="purple"
+      >
+        <v-list-item-icon class="mr-2">
+          <v-icon>mdi-credit-card-scan</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>SCAN RESI</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('SETTING-GROUP')">SETTING</v-subheader>
       <v-list-item
         link
         v-if="CAN_ACCESS('SETTING-PENGGUNA-PERMISSIONS_BROWSE')"
@@ -261,9 +272,9 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from "vuex";
+  import { mapGetters } from 'vuex';
   export default {
-    name: "RenjaMurniLayout",
+    name: 'AdminLayout',
     props: {
       showrightsidebar: {
         type: Boolean,
@@ -284,39 +295,39 @@
         this.loginTime = 0;
         this.$ajax
           .post(
-            "/auth/logout",
+            '/auth/logout',
             {},
             {
               headers: {
-                Authorization: "Bearer " + this.TOKEN,
+                Authorization: 'Bearer ' + this.TOKEN,
               },
             }
           )
           .then(() => {
-            this.$store.dispatch("auth/logout");
-            this.$router.push("/");
+            this.$store.dispatch('auth/logout');
+            this.$router.push('/');
           })
           .catch(() => {
-            this.$store.dispatch("auth/logout");
-            this.$router.push("/");
+            this.$store.dispatch('auth/logout');
+            this.$router.push('/');
           });
       },
     },
     computed: {
-      ...mapGetters("auth", {
-        DEFAULT_ROLE: "DefaultRole",
-        ACCESS_TOKEN: "AccessToken",
-        ROLE: "Role",
-        CAN_ACCESS: "can",
-        ATTRIBUTE_USER: "AttributeUser",
+      ...mapGetters('auth', {
+        DEFAULT_ROLE: 'DefaultRole',
+        ACCESS_TOKEN: 'AccessToken',
+        ROLE: 'Role',
+        CAN_ACCESS: 'can',
+        ATTRIBUTE_USER: 'AttributeUser',
       }),
       photoUser() {
-        let img = this.ATTRIBUTE_USER("foto");
+        let img = this.ATTRIBUTE_USER('foto');
         var photo;
-        if (img == "") {
-          photo = this.$backend.storageURL + "/images/users/no_photo.png";
+        if (img == '') {
+          photo = this.$backend.storageURL + '/images/users/no_photo.png';
         } else {
-          photo = this.$backend.url + "/" + img;
+          photo = this.$backend.url + '/' + img;
         }
         return photo;
       },
