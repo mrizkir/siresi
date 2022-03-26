@@ -5,7 +5,7 @@
         mdi-credit-card-scan
       </template>
       <template v-slot:name>
-        SCAN RESI
+        SCAN RESI [{{ waktu }}]
       </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
@@ -21,50 +21,56 @@
       </template>
     </ModuleHeader>
     <v-container fluid>
-      <v-row>
-				<v-col cols="12">
-          <v-card>
-            <v-card-title>
-              <span class="headline">Masukan Nomor Resi Invoice</span>
-            </v-card-title>
-            <v-card-text>
-              <v-text-field
-                v-model="formdata.no_resi"
-                label="Nomor Resi"
-                outlined
-                :rules="rule_user_name"
-                filled
-              >
-              </v-text-field>
-            </v-card-text>
-          </v-card>          
-        </v-col>
-        <v-col cols="12">
-          <v-card>
-            <v-card-title>
-              <span class="headline">Pilih Picker</span>
-            </v-card-title>
-            <v-card-text>
-              <v-radio-group v-model="formdata.picker_id">
-                <v-radio
-                  v-for="(item,index) in daftar_picker"
-                  :key="index"
-                  :label="`${item.name} (0)`"
-                  :value="item.id"
-                />
-              </v-radio-group>
-              <v-alert
-                dense
-                border="left"
-                type="warning"
-                v-if="!(daftar_picker.length > 0)"
-              >
-                belum ada picker !!!
-              </v-alert>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
+      <v-form ref="frmdata" v-model="form_valid" lazy-validation>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title>
+                <span class="headline">Masukan Nomor Resi Invoice</span>
+              </v-card-title>
+              <v-card-text>
+                <v-text-field
+                  v-model="formdata.no_resi"
+                  label="Nomor Resi"
+                  outlined
+                  :rules="rule_no_resi"
+                  filled
+                  :error-messages="error_no_resi_server_side"
+                >
+                </v-text-field>
+              </v-card-text>
+            </v-card>          
+          </v-col>
+          <v-col cols="12">          
+            <v-card>
+              <v-card-title>
+                <span class="headline">Pilih Picker</span>
+              </v-card-title>
+              <v-card-text>
+                <v-radio-group
+                  v-model="picker_id"
+                  @change="onSubmit"                
+                >
+                  <v-radio
+                    v-for="(item,index) in daftar_picker"
+                    :key="index"
+                    :label="`${item.name} (${item.jumlah})`"
+                    :value="item.id"                  
+                  />
+                </v-radio-group>
+                <v-alert
+                  dense
+                  border="left"
+                  type="warning"
+                  v-if="!(daftar_picker.length > 0)"
+                >
+                  belum ada picker !!!
+                </v-alert>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-form>
     </v-container>
   </AdminLayout>
 </template>
@@ -77,19 +83,19 @@
     created() {
       this.breadcrumbs = [
         {
-          text: "HOME",
+          text: 'HOME',
           disabled: false,
-          href: "/dashboard/" + this.ACCESS_TOKEN,
+          href: '/dashboard/' + this.ACCESS_TOKEN,
         },
         {
-          text: "TRANSAKSI",
+          text: 'TRANSAKSI',
           disabled: true,
-          href: "#",
+          href: '#',
         },
         {
-          text: "SCAN RESI",
+          text: 'SCAN RESI',
           disabled: true,
-          href: "#",
+          href: '#',
         },
       ];
     },
@@ -99,16 +105,22 @@
     data: () => ({
 			btnLoading: false,
       daftar_picker: [],
-      formdata: {
+      waktu: null,
+      //form
+      form_valid: true,      
+      picker_id: null,
+      formdata: {        
         no_resi: null,
-        picker_id: null,
       },
+      error_no_resi_server_side: null,
+      //form rules      
+      rule_no_resi: [value => !!value || 'Mohon untuk di isi nomor resi !!!'],      
     }),
     methods: {
       initialize: async function() {
         this.datatableLoading = true;
         await this.$ajax
-          .post('/transaksi/resi/picker', 
+          .post('/transaksi/picker', 
           {
 
           },
@@ -118,8 +130,46 @@
             },
           })
           .then(({ data }) => {
-            this.daftar_picker = data.picker;           
+            this.waktu = data.waktu
+            this.daftar_picker = data.picker       
           });
+      },
+      onSubmit() {        
+        if (this.$refs.frmdata.validate()) {
+          this.$ajax
+          .post(
+            '/transaksi/picker/store',
+            {
+              no_resi: this.formdata.no_resi,
+              picker_id: this.picker_id,              
+            },
+            {
+              headers: {
+                Authorization: this.$store.getters['auth/Token'],
+              },
+            }
+          )
+          .then(() => {
+            this.$router.go()
+          })
+          .catch(() => {
+            this.picker_id = null;
+          });
+        } else {
+          this.$nextTick(() => {
+            this.picker_id = null
+          })
+        }
+      },
+    },
+    watch: {
+      form_valid(val) {
+        if (val == false) {
+          this.picker_id = null
+        }
+      },
+      error_no_resi_server_side(val) {
+        console.log(val)
       },
     },
     components: {

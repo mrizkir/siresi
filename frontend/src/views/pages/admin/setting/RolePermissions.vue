@@ -130,18 +130,18 @@
 	</v-card>
 </template>
 <script>
-	import { mapGetters } from "vuex";
+	import { mapGetters } from 'vuex';
 	export default {
-		name: "RolePermissions",
+		name: 'RolePermissions',
 		data: () => ({
 			btnLoading: false,
 			//tables
 			headers: [
-				{ text: "NAMA PERMISSION", value: "name" },
-				{ text: "GUARD", value: "guard_name" },
-				{ text: "AKSI", value: "actions", sortable: false, width: 100 },
+				{ text: 'NAMA PERMISSION', value: 'name' },
+				{ text: 'GUARD', value: 'guard_name' },
+				{ text: 'AKSI', value: 'actions', sortable: false, width: 100 },
 			],
-			search: "",
+			search: '',
 			perm_selected: [],
 		}),
 		methods: {
@@ -149,7 +149,7 @@
 				this.btnLoading = true;
 				this.$ajax
 					.post(
-						"/setting/pengguna/roles/storerolepermissions",
+						'/setting/pengguna/roles/storerolepermissions',
 						{
 							role_id: this.role.id,
 							chkpermission: this.permissions_selected,
@@ -172,7 +172,7 @@
 				this.btnLoading = true;
 				this.$ajax
 					.post(
-						"/setting/pengguna/roles/revokerolepermissions",
+						'/setting/pengguna/roles/revokerolepermissions',
 						{
 							role_id: this.role.id,
 							name: item.name,
@@ -194,7 +194,7 @@
 			close() {
 				this.btnLoading = false;
 				this.permissions_selected = [];
-				this.$emit("closeRolePermissions", this.role.id);
+				this.$emit('closeRolePermissions', this.role.id);
 			},
 		},
 		props: {
@@ -203,8 +203,8 @@
 			permissionsselected: Array,
 		},
 		computed: {
-			...mapGetters("auth", {
-				TOKEN: "Token",
+			...mapGetters('auth', {
+				TOKEN: 'Token',
 			}),
 			daftar_permissions() {
 				return this.daftarpermissions;

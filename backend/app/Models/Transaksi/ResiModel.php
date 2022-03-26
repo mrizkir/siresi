@@ -27,8 +27,8 @@ class ResiModel extends Model {
 		'no_resi',
 		'user_id_picker',
 		'user_id_scan',
-
 		'resi_id_src',
+		'status',
 	];
 	/**
 	 * enable auto_increment.
