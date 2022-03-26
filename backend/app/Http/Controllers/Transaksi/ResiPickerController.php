@@ -27,7 +27,7 @@ class ResiPickerController extends Controller
 
     $data = User::select(\DB::raw('
       users.*,
-      resi.jumlah
+      COALESCE(resi.jumlah, 0) AS jumlah
     '))
     ->leftJoinSub($subquery, 'resi', function($join) {
       $join->on('resi.user_id_picker','=','users.id');

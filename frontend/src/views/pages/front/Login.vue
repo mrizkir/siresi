@@ -85,35 +85,35 @@
       form_valid: true,
       form_error: false,			
       formlogin: {
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       },      
       rule_username: [
-        value => !!value || "Kolom Username mohon untuk diisi !!!",
+        value => !!value || 'Kolom Username mohon untuk diisi !!!',
       ],
       rule_password: [
-        value => !!value || "Kolom Password mohon untuk diisi !!!",
+        value => !!value || 'Kolom Password mohon untuk diisi !!!',
       ],
       rule_email: [
-        value => !!value || "Email mohon untuk diisi !!!",
-        v => /.+@.+\..+/.test(v) || "Format E-mail mohon di isi dengan benar",
+        value => !!value || 'Email mohon untuk diisi !!!',
+        v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
       ],
-      rule_code: [value => /^[0-9]+$/.test(value) || "Code hanya boleh angka"],
+      rule_code: [value => /^[0-9]+$/.test(value) || 'Code hanya boleh angka'],
     }),
     methods: {
       doLogin: async function() {
         if (this.$refs.frmlogin.validate()) {
           this.btnLoading = true;
           await this.$ajax
-            .post("/auth/login", {
+            .post('/auth/login', {
               username: this.formlogin.username,
               password: this.formlogin.password,
             })
             .then(({ data }) => {
               this.$ajax
-                .get("/auth/me", {
+                .get('/auth/me', {
                   headers: {
-                    Authorization: data.token_type + " " + data.access_token,
+                    Authorization: data.token_type + ' ' + data.access_token,
                   },
                 })
                 .then(response => {
@@ -121,11 +121,11 @@
                     token: data,
                     user: response.data,
                   };
-                  this.$store.dispatch("auth/afterLoginSuccess", data_user);
+                  this.$store.dispatch('auth/afterLoginSuccess', data_user);
                 });
               this.btnLoading = false;
               this.form_error = false;
-              this.$router.push("/dashboard/" + data.access_token);
+              this.$router.push('/dashboard/' + data.access_token);
             })
             .catch(() => {
               this.form_error = true;

@@ -79,7 +79,7 @@
   import AdminLayout from '@/views/layouts/AdminLayout'
   import ModuleHeader from '@/components/ModuleHeader'
   export default {
-    name: 'TransaksiScanResi',
+    name: 'TransaksiPickerScanResi',
     created() {
       this.breadcrumbs = [
         {

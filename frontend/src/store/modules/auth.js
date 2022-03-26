@@ -33,14 +33,14 @@ const getters = {
 		return state.access_token
 	},
 	Token: state => {
-		return state.token_type + " " + state.access_token
+		return state.token_type + ' ' + state.access_token
 	},
   Roles: state => {
 		return state.user.role
 	},
 	DefaultRole: state => {
-		if (state.user === null || typeof state.user === "undefined") {
-			return "N.A"
+		if (state.user === null || typeof state.user === 'undefined') {
+			return 'N.A'
 		} else {
 			return state.user.role
 		}
@@ -52,15 +52,15 @@ const getters = {
 		return state.user
 	},
 	AttributeUser: state => key => {
-		return state.user == null ? "" : state.user[key]
+		return state.user == null ? '' : state.user[key]
 	},
 	DetailUser: state => key => {
 		let user = state.user
 		if (user !== null) {
 			let detail = state.user.detail
-			return (typeof detail === 'undefined' || detail == null) ? "" : detail[key]
+			return (typeof detail === 'undefined' || detail == null) ? '' : detail[key]
 		} else {
-			return ""
+			return ''
 		}
 	},
 	can: state => name => {
@@ -78,11 +78,11 @@ const getters = {
 // actions
 const actions = {
 	afterLoginSuccess({ commit }, data) {
-		commit("setToken", data.token)
-		commit("setUser", data.user)		
+		commit('setToken', data.token)
+		commit('setUser', data.user)		
 	},
 	logout({ commit }) {
-		commit("resetState")
+		commit('resetState')
 	},
 }
 

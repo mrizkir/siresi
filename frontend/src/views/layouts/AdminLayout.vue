@@ -2,7 +2,7 @@
   <div>
     <v-system-bar app dark class="black lighten-2 white--text">
       <v-spacer></v-spacer>
-      <strong>Hak Akses Sebagai:</strong> {{ ROLE }}			
+      <strong>Hak Akses Sebagai:</strong> {{ DEFAULT_ROLE }}			
     </v-system-bar>
     <v-app-bar
       elevation="0"
@@ -112,7 +112,7 @@
       </v-list-item>						
       <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('TRANSAKSI-GROUP')">TRANSAKSI</v-subheader>
       <v-list-item
-        :to="{ path: '/transaksi/scanresi' }"
+        :to="url"
         v-if="CAN_ACCESS('TRANSAKSI-RESI_BROWSE')"
         link
         active-class="purple accent-1"
@@ -275,6 +275,9 @@
   import { mapGetters } from 'vuex';
   export default {
     name: 'AdminLayout',
+    created() {
+      this.url = '/transaksi/picker/scanresi'
+    },
     props: {
       showrightsidebar: {
         type: Boolean,
@@ -289,6 +292,7 @@
       loginTime: 0,
       drawer: null,
       drawerRight: null,
+      url: null,
     }),
     methods: {
       logout() {

@@ -23,7 +23,7 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	//transaksi - scan resi
 
 	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
-	$router->post('/transaksi/picker', ['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
+	$router->post('/transaksi/picker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
 	//digunakan untuk menyimpan 
 	$router->post('/transaksi/picker/store', ['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@store','as'=>'transaksi-resi-picker.store']);
 

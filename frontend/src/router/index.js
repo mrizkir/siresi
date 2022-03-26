@@ -25,14 +25,14 @@ const routes = [
 
   // transaksi  - scan resi
   {
-    path: '/transaksi/scanresi',
-    name: 'TransaksiScanResi',
+    path: '/transaksi/picker/scanresi',
+    name: 'TransaksiPickerScanResi',
     meta: {
       title: 'TRANSAKSI - SCAN RESI',
       requiresAuth: true,
     },
     component: () =>
-      import('../views/pages/admin/transaksi/TransaksiScanResi.vue'),
+      import('../views/pages/admin/transaksi/TransaksiPickerScanResi.vue'),
   },
 
   // setting  - pengguna
