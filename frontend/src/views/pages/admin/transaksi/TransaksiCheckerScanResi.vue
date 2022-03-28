@@ -1,5 +1,5 @@
 <template>
-  <AdminLayout>
+  <AdminLayout v-if="$store.getters['auth/DefaultRole'] == 'checker'">
     <ModuleHeader>
       <template v-slot:icon>
         mdi-credit-card-scan
@@ -41,34 +41,6 @@
               </v-card-text>
             </v-card>          
           </v-col>
-          <v-col cols="12">          
-            <v-card>
-              <v-card-title>
-                <span class="headline">Pilih Picker</span>
-              </v-card-title>
-              <v-card-text>
-                <v-radio-group
-                  v-model="picker_id"
-                  @change="onSubmit"                
-                >
-                  <v-radio
-                    v-for="(item,index) in daftar_picker"
-                    :key="index"
-                    :label="`${item.name} (${item.jumlah})`"
-                    :value="item.id"                  
-                  />
-                </v-radio-group>
-                <v-alert
-                  dense
-                  border="left"
-                  type="warning"
-                  v-if="!(daftar_picker.length > 0)"
-                >
-                  belum ada picker !!!
-                </v-alert>
-              </v-card-text>
-            </v-card>
-          </v-col>
         </v-row>
       </v-form>
     </v-container>
@@ -79,13 +51,16 @@
   import AdminLayout from '@/views/layouts/AdminLayout'
   import ModuleHeader from '@/components/ModuleHeader'
   export default {
-    name: 'TransaksiPickerScanResi',
+    name: 'TransaksiCheckerScanResi',
     created() {
+      if (this.$store.getters['auth/DefaultRole'] != 'checker') {
+        this.$router.push('/dashboard/' + this.$store.getters['auth/Token'])
+      }
       this.breadcrumbs = [
         {
           text: 'HOME',
           disabled: false,
-          href: '/dashboard/' + this.ACCESS_TOKEN,
+          href: '/dashboard/' + this.$store.getters['auth/Token'],
         },
         {
           text: 'TRANSAKSI',
@@ -100,7 +75,7 @@
       ];
     },
     mounted() {
-      this.initialize()
+      // this.initialize()
     },
     data: () => ({
 			btnLoading: false,

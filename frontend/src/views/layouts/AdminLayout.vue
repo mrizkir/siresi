@@ -112,8 +112,22 @@
       </v-list-item>						
       <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('TRANSAKSI-GROUP')">TRANSAKSI</v-subheader>
       <v-list-item
-        :to="url"
-        v-if="CAN_ACCESS('TRANSAKSI-RESI_BROWSE')"
+        to="/transaksi/admin/scanresi"
+        v-if="CAN_ACCESS('TRANSAKSI-ADMIN-SCAN-RESI_BROWSE') && DEFAULT_ROLE == 'admin'"
+        link
+        active-class="purple accent-1"
+        color="purple"
+      >
+        <v-list-item-icon class="mr-2">
+          <v-icon>mdi-credit-card-scan</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>SCAN RESI</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        to="/transaksi/checker/scanresi"
+        v-else-if="CAN_ACCESS('TRANSAKSI-CHECKER-SCAN-RESI_BROWSE') && DEFAULT_ROLE == 'checker'"
         link
         active-class="purple accent-1"
         color="purple"
@@ -274,10 +288,7 @@
 <script>
   import { mapGetters } from 'vuex';
   export default {
-    name: 'AdminLayout',
-    created() {
-      this.url = '/transaksi/picker/scanresi'
-    },
+    name: 'AdminLayout',    
     props: {
       showrightsidebar: {
         type: Boolean,
@@ -292,7 +303,6 @@
       loginTime: 0,
       drawer: null,
       drawerRight: null,
-      url: null,
     }),
     methods: {
       logout() {

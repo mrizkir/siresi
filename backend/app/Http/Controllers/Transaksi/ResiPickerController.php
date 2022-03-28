@@ -15,7 +15,7 @@ class ResiPickerController extends Controller
 {
   public function picker(Request $request)
   {
-    $this->hasPermissionTo('TRANSAKSI-RESI_BROWSE');
+    $this->hasPermissionTo('TRANSAKSI-ADMIN-SCAN-RESI_BROWSE');
 
     $subquery=\DB::table('resi')
     ->select(\DB::raw('
@@ -46,7 +46,7 @@ class ResiPickerController extends Controller
   }
   public function store(Request $request)
 	{
-		$this->hasPermissionTo('TRANSAKSI-RESI_STORE');
+		$this->hasPermissionTo('TRANSAKSI-ADMIN-SCAN-RESI_STORE');
 
 		$this->validate($request, [
 			'no_resi'=>'required||unique:resi,no_resi',

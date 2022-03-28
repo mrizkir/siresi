@@ -55,10 +55,10 @@ class UsersController extends Controller {
       $now = \Carbon\Carbon::now()->toDateTimeString();        
       $user=User::create([
         'id'=>Uuid::uuid4()->toString(),
-        'name'=>$request->input('name'),
+        'name'=>strtoupper($request->input('name')),
         'email'=>$request->input('email'),
         'nomor_hp'=>$request->input('nomor_hp'),
-        'username'=> $request->input('username'),
+        'username'=> strtolower($request->input('username')),
         'password'=>Hash::make($request->input('password')),
         'email_verified_at'=>\Carbon\Carbon::now(),
         'theme'=>'default',            
@@ -134,10 +134,10 @@ class UsersController extends Controller {
     $role_name=$request->input('role_name');        
     switch($role_name)
     {            
-      case 'bapelitbang':
+      case 'admin':
         $permission=Role::findByName($role_name)->permissions;
         $permissions=$permission->pluck('name');
-        $data = User::role('bapelitbang')
+        $data = User::role('admin')
             ->select(\DB::raw('users.id'))                        
             ->where('active',1)
             ->get();
@@ -148,10 +148,10 @@ class UsersController extends Controller {
           $user->givePermissionTo($permissions);                 
         }                
       break;
-      case 'opd':
+      case 'picker':
         $permission=Role::findByName($role_name)->permissions;
         $permissions=$permission->pluck('name');
-        $data = User::role('opd')
+        $data = User::role('picker')
             ->select(\DB::raw('users.id'))                        
             ->where('active',1)
             ->get();
@@ -162,10 +162,10 @@ class UsersController extends Controller {
           $user->givePermissionTo($permissions);                 
         }                
       break;
-      case 'pptk':
+      case 'handoffer':
         $permission=Role::findByName($role_name)->permissions;
         $permissions=$permission->pluck('name');
-        $data = User::role('pptk')
+        $data = User::role('handoffer')
             ->select(\DB::raw('users.id'))                        
             ->where('active',1)
             ->get();
@@ -176,10 +176,10 @@ class UsersController extends Controller {
           $user->givePermissionTo($permissions);                 
         }                
       break;
-      case 'dewan':
+      case 'checker':
         $permission=Role::findByName($role_name)->permissions;
         $permissions=$permission->pluck('name');
-        $data = User::role('dewan')
+        $data = User::role('checker')
             ->select(\DB::raw('users.id'))                        
             ->where('active',1)
             ->get();
@@ -189,21 +189,7 @@ class UsersController extends Controller {
           \DB::table('model_has_permissions')->where('model_id',$user->id)->delete();
           $user->givePermissionTo($permissions);                 
         }                
-      break;
-      case 'tapd':
-        $permission=Role::findByName($role_name)->permissions;
-        $permissions=$permission->pluck('name');
-        $data = User::role('tapd')
-            ->select(\DB::raw('users.id'))                        
-            ->where('active',1)
-            ->get();
-
-        foreach ($data as $user)
-        {
-          \DB::table('model_has_permissions')->where('model_id',$user->id)->delete();
-          $user->givePermissionTo($permissions);                 
-        }                
-      break;            
+      break;             
     }       
     return Response()->json([
                   'status'=>1,
@@ -296,9 +282,9 @@ class UsersController extends Controller {
                   ]);  
       
       $user = \DB::transaction(function () use ($request,$user) {
-        $user->name = $request->input('name');
+        $user->name = strtoupper($request->input('name'));
         $user->email = $request->input('email');
-        $user->username = $request->input('username');                        
+        $user->username = strtolower($request->input('username'));                        
         $user->nomor_hp = $request->input('nomor_hp');                        
         if (!empty(trim($request->input('password')))) {
           $user->password = Hash::make($request->input('password'));
@@ -518,59 +504,5 @@ class UsersController extends Controller {
                     'message'=>"Foto User ($username)  berhasil direset"
                   ], 200); 
     }
-  }
-  public function usersopd (Request $request,$id)
-  {
-    $user = User::find($id); 
-
-    if ($user == null)
-    {
-      return Response()->json([
-                  'status'=>0,
-                  'pid'=>'store',                
-                  'message'=>["Data User tidak ditemukan."]
-                ], 422);         
-    }
-    else
-    {
-      $username = $user->username;            
-      $opd=$user->opd;            
-      return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',
-                    'daftar_opd'=>$opd,                
-                    'message'=>"Daftar OPD dari username ($username)  berhasil diperoleh"
-                  ], 200); 
-    }
-  }
-  public function usersunitkerja (Request $request,$id)
-  {
-    $user = User::find($id); 
-
-    if ($user == null)
-    {
-      return Response()->json([
-                  'status'=>0,
-                  'pid'=>'store',                
-                  'message'=>["Data User tidak ditemukan."]
-                ], 422);         
-    }
-    else
-    {
-      $username = $user->username;            
-      $unitkerja=$user->unitkerja;            
-      $OrgID = null;
-      if (!is_null($unitkerja)) 
-      {
-        $OrgID = $unitkerja[0]->OrgID;
-      }            
-      return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',
-                    'OrgID'=>$OrgID,
-                    'daftar_unitkerja'=>$unitkerja,
-                    'message'=>"Daftar Unit Kerja dari username ($username)  berhasil diperoleh"
-                  ], 200); 
-    }
-  }
+  }  
 }

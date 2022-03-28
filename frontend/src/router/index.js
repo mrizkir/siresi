@@ -23,16 +23,28 @@ const routes = [
     component: () => import('../views/pages/admin/DashboardAdmin.vue'),
   },
 
-  // transaksi  - scan resi
+  // transaksi  - admin scan resi
   {
-    path: '/transaksi/picker/scanresi',
+    path: '/transaksi/admin/scanresi',
+    name: 'TransaksiAdminScanResi',
+    meta: {
+      title: 'TRANSAKSI - SCAN RESI',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiAdminScanResi.vue'),
+  },
+
+  // transaksi  - checker scan resi
+  {
+    path: '/transaksi/checker/scanresi',
     name: 'TransaksiPickerScanResi',
     meta: {
       title: 'TRANSAKSI - SCAN RESI',
       requiresAuth: true,
     },
     component: () =>
-      import('../views/pages/admin/transaksi/TransaksiPickerScanResi.vue'),
+      import('../views/pages/admin/transaksi/TransaksiCheckerScanResi.vue'),
   },
 
   // setting  - pengguna

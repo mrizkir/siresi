@@ -20,12 +20,17 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->get('/auth/refresh', ['uses'=>'AuthController@refresh', 'as'=>'auth.refresh']);
 	$router->get('/auth/me', ['uses'=>'AuthController@me', 'as'=>'auth.me']);
 
-	//transaksi - scan resi
+	//transaksi - admin scan resi
 
 	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
 	$router->post('/transaksi/picker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
-	//digunakan untuk menyimpan 
+	//digunakan untuk menyimpan resi dilakukan oleh Admin
 	$router->post('/transaksi/picker/store', ['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@store','as'=>'transaksi-resi-picker.store']);
+	
+	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
+	$router->post('/transaksi/checker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiCheckerController@picker','as'=>'transaksi-resi-checker.picker']);
+	//digunakan untuk menyimpan resi dilakukan oleh checker
+	$router->post('/transaksi/checker/store', ['middleware'=>['role:superadmin|checker'],'uses'=>'Transaksi\ResiCheckerController@store','as'=>'transaksi-resi-checker.store']);
 
 	//setting - permissions
 	$router->get('/setting/pengguna/permissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\PermissionsController@index','as'=>'permissions.index']);
