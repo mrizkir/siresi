@@ -38,13 +38,25 @@ const routes = [
   // transaksi  - checker scan resi
   {
     path: '/transaksi/checker/scanresi',
-    name: 'TransaksiPickerScanResi',
+    name: 'TransaksiCheckerScanResi',
     meta: {
       title: 'TRANSAKSI - SCAN RESI',
       requiresAuth: true,
     },
     component: () =>
       import('../views/pages/admin/transaksi/TransaksiCheckerScanResi.vue'),
+  },
+
+  // transaksi  - handoffer scan resi
+  {
+    path: '/transaksi/handoffer/scanresi',
+    name: 'TransaksiHandofferScanResi',
+    meta: {
+      title: 'TRANSAKSI - SCAN RESI',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiHandofferScanResi.vue'),
   },
 
   // setting  - pengguna

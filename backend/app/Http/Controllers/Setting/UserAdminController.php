@@ -135,14 +135,14 @@ class UserAdminController extends Controller
 		else
 		{
 			$this->validate($request, [
-										'username'=>[
-														'required',
-														'unique:users,username,'.$user->id
-													],           
-										'name'=>'required',            
-										'email'=>'required|string|email|unique:users,email,'.$user->id,
-										'nomor_hp'=>'required|string|unique:users,nomor_hp,'.$user->id,                                                    
-									]); 
+				'username'=>[
+					'required',
+					'unique:users,username,'.$user->id
+					],           
+				'name'=>'required',            
+				'email'=>'required|string|email|unique:users,email,'.$user->id,
+				'nomor_hp'=>'required|string|unique:users,nomor_hp,'.$user->id,                                                    
+			]); 
 			$user = \DB::transaction(function () use ($request,$user) {
 				$user->name = strtoupper($request->input('name'));
 				$user->email = $request->input('email');

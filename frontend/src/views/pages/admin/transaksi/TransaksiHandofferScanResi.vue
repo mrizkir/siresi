@@ -1,5 +1,5 @@
 <template>
-  <AdminLayout v-if="$store.getters['auth/DefaultRole'] == 'checker'">
+  <AdminLayout v-if="$store.getters['auth/DefaultRole'] == 'handoffer'">
     <ModuleHeader>
       <template v-slot:icon>
         mdi-credit-card-scan
@@ -104,9 +104,9 @@
   import AdminLayout from '@/views/layouts/AdminLayout'
   import ModuleHeader from '@/components/ModuleHeader'
   export default {
-    name: 'TransaksiCheckerScanResi',
+    name: 'TransaksiHandofferScanResi',
     created() {
-      if (this.$store.getters['auth/DefaultRole'] != 'checker') {
+      if (this.$store.getters['auth/DefaultRole'] != 'handoffer') {
         this.$router.push('/dashboard/' + this.$store.getters['auth/Token'])
       }
       this.breadcrumbs = [
@@ -142,17 +142,17 @@
       initialize: async function() {
         this.datatableLoading = true
         await this.$ajax
-          .post('/transaksi/checker', 
-          {
-
-          },
-          {
-            headers: {
-              Authorization: this.$store.getters['auth/Token'],
-            },
-          })
+          .post(
+            '/transaksi/handoffer',
+            {},
+            {
+              headers: {
+                Authorization: this.$store.getters['auth/Token'],
+              },
+            }
+          )
           .then(({ data }) => {
-            this.waktu = data.waktu            
+            this.waktu = data.waktu
           })
       },
       field_alias(atr) {
@@ -160,17 +160,17 @@
         switch (atr) {
           case 'id':
             alias = 'RESI ID'
-          break
+            break
           case 'no_resi':
             alias = 'NOMOR RESI'
-          break
+            break
         }
         return alias
       },
       onSubmit() {
         this.$ajax
           .post(
-            '/transaksi/checker/store',
+            '/transaksi/handoffer/store',
             {
               resi_id: this.data_resi.id,
             },
@@ -184,23 +184,23 @@
             this.$router.go()
           })
           .catch(() => {
-            this.picker_id = null;
-          });
+            this.picker_id = null
+          })
       },
       clearDataResi() {
         this.data_resi = null
-        this.$refs.ref_data_resi.cachedItems=[] 
-      }
+        this.$refs.ref_data_resi.cachedItems = []
+      },
     },
     watch: {
-      search (val) {
-			if (this.isLoading) return			
+      search(val) {
+        if (this.isLoading) return
         if (val && val !== this.data_resi && val.length > 1) {
           setTimeout(async () => {
-            this.isLoading = true 
+            this.isLoading = true
             await this.$ajax
               .post(
-                '/transaksi/checker/search',
+                '/transaksi/handoffer/search',
                 {
                   search: val,
                 },

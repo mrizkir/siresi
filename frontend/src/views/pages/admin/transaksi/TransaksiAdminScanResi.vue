@@ -144,7 +144,7 @@
             '/transaksi/picker/store',
             {
               no_resi: this.formdata.no_resi,
-              picker_id: this.picker_id,              
+              picker_id: this.picker_id,
             },
             {
               headers: {

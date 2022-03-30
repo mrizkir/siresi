@@ -20,17 +20,31 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->get('/auth/refresh', ['uses'=>'AuthController@refresh', 'as'=>'auth.refresh']);
 	$router->get('/auth/me', ['uses'=>'AuthController@me', 'as'=>'auth.me']);
 
-	//transaksi - admin scan resi
+	//transaksi - ADMIN scan resi
+	$router->post('/transaksi/resi/search',['uses'=>'Transaksi\ResiController@search','as'=>'resi.search']);
 
 	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
 	$router->post('/transaksi/picker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
-	//digunakan untuk menyimpan resi dilakukan oleh Admin
+	//digunakan untuk menyimpan resi yang dihandle oleh seorang picker dilakukan oleh Admin
 	$router->post('/transaksi/picker/store', ['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@store','as'=>'transaksi-resi-picker.store']);
 	
-	//digunakan untuk mendapatkan daftar user picker beserta jumlah resi seluruhnya atau per tanggal
-	$router->post('/transaksi/checker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiCheckerController@picker','as'=>'transaksi-resi-checker.picker']);
+	//transaksi - CHECKER scan resi
+	//digunakan untuk mendapatkan daftar resi yang dilakukan oleh seorang checker
+	$router->post('/transaksi/checker', ['middleware'=>['role:superadmin|admin|checker'],'uses'=>'Transaksi\ResiCheckerController@index','as'=>'transaksi-resi-checker.index']);
+	
+	//digunakan untuk mencari resi yang statusnya = 1 (baru discan oleh admins)
+	$router->post('/transaksi/checker/search',['uses'=>'Transaksi\ResiCheckerController@search','as'=>'transaksi-resi-checker.search']);
 	//digunakan untuk menyimpan resi dilakukan oleh checker
 	$router->post('/transaksi/checker/store', ['middleware'=>['role:superadmin|checker'],'uses'=>'Transaksi\ResiCheckerController@store','as'=>'transaksi-resi-checker.store']);
+
+	//transaksi - HANDOFFER scan resi
+	//digunakan untuk mendapatkan daftar resi yang dilakukan oleh seorang hand offer
+	$router->post('/transaksi/handoffer', ['middleware'=>['role:superadmin|admin|handoffer'],'uses'=>'Transaksi\ResiHandofferController@index','as'=>'transaksi-resi-handoffer.index']);
+	
+	//digunakan untuk mencari resi yang statusnya = 1 (baru discan oleh handoffer)
+	$router->post('/transaksi/handoffer/search',['uses'=>'Transaksi\ResiHandofferController@search','as'=>'transaksi-resi-handoffer.search']);
+	//digunakan untuk menyimpan resi dilakukan oleh checker
+	$router->post('/transaksi/handoffer/store', ['middleware'=>['role:superadmin|handoffer'],'uses'=>'Transaksi\ResiHandofferController@store','as'=>'transaksi-resi-handoffer.store']);
 
 	//setting - permissions
 	$router->get('/setting/pengguna/permissions',['middleware'=>['role:superadmin'],'uses'=>'Setting\PermissionsController@index','as'=>'permissions.index']);
