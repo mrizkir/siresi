@@ -193,7 +193,7 @@
 			},
 			close() {
 				this.btnLoading = false;
-				this.permissions_selected = [];
+				this.permissions_selected = []
 				this.$emit('closeRolePermissions', this.role.id);
 			},
 		},

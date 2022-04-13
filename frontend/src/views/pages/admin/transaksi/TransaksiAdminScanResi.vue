@@ -100,13 +100,14 @@
           disabled: true,
           href: '#',
         },
-      ];
+      ]
     },
     mounted() {
       this.initialize()
     },
     data: () => ({
-			btnLoading: false,
+      breadcrumbs: [],
+			btnLoading: false,			
       daftar_picker: [],
       waktu: null,
       //form
@@ -120,8 +121,7 @@
       rule_no_resi: [value => !!value || 'Mohon untuk di isi nomor resi !!!'],      
     }),
     methods: {
-      initialize: async function() {
-        this.datatableLoading = true;
+      initialize: async function() {        
         await this.$ajax
           .post('/transaksi/picker', 
           {

@@ -59,6 +59,17 @@ const routes = [
       import('../views/pages/admin/transaksi/TransaksiHandofferScanResi.vue'),
   },
 
+  // transaksi  - posisi resi yang ada di tangan picker
+  {
+    path: '/transaksi/resipicker',
+    name: 'TransaksiResiPicker',
+    meta: {
+      title: 'TRANSAKSI - RESI PICKER',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiResiPicker.vue'),
+  },
   // setting  - pengguna
   {
     path: '/setting/pengguna/permissions',
