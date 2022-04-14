@@ -139,7 +139,7 @@
       waktu: null,
     }),
     methods: {
-      initialize: async function() {
+      async initialize() {
         this.datatableLoading = true
         await this.$ajax
           .post('/transaksi/checker', 
@@ -164,6 +164,9 @@
           case 'no_resi':
             alias = 'NOMOR RESI'
           break
+          case 'name':
+            alias = 'NAMA PICKER'
+          break
         }
         return alias
       },
@@ -185,7 +188,7 @@
           })
           .catch(() => {
             this.picker_id = null;
-          });
+          })
       },
       clearDataResi() {
         this.data_resi = null

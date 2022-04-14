@@ -219,7 +219,7 @@
 					})
 					.then(({ data }) => {
 						this.daftar_role = data.roles;
-					});
+					})
 			},
 			save() {
 				this.btnLoading = true;
@@ -241,7 +241,7 @@
 					})
 					.catch(() => {
 						this.btnLoading = false;
-					});
+					})
 			},
 			revoke(item) {
 				this.btnLoading = true;
@@ -263,7 +263,7 @@
 					})
 					.catch(() => {
 						this.btnLoading = false;
-					});
+					})
 			},
 			exit() {
 				this.$emit("closeUserPermissions");
@@ -289,7 +289,7 @@
 						)
 						.then(({ data }) => {
 							this.daftar_permissions = data.permissions;
-						});
+						})
 
 					await this.$ajax
 						.get("/setting/users/" + this.user.id + "/permission", {
@@ -299,7 +299,7 @@
 						})
 						.then(({ data }) => {
 							this.permissions_selected = data.permissions;
-						});
+						})
 					this.datatableLoading = false;
 				}
 			},

@@ -427,7 +427,7 @@
       ],
     }),
     methods: {
-      initialize: async function() {
+      async initialize() {
         this.datatableLoading = true;
         await this.$ajax
           .get("/setting/pengguna/admin", {
@@ -439,7 +439,7 @@
             this.daftar_users = data.users
             this.role_id = data.role.id;
             this.datatableLoading = false;
-          });
+          })
       },
       dataTableRowClicked(item) {
         if (item === this.expanded[0]) {
@@ -475,9 +475,9 @@
                 })
                 .catch(() => {
                   this.btnLoading = false;
-                });
+                })
             }
-          });
+          })
       },
       showDialogTambahUserAdmin: async function() {
         this.dialog = true;				
@@ -498,7 +498,7 @@
             this.editedItem.role_id = data.roles;
             this.btnLoading = false;
             this.dialogEdit = true;
-          });
+          })
       },
       setPermission: async function(item) {
         this.dialogUserPermission = true;
@@ -548,7 +548,7 @@
               })
               .catch(() => {
                 this.btnLoading = false;
-              });
+              })
           } else {
             this.$ajax
               .post(
@@ -575,7 +575,7 @@
               })
               .catch(() => {
                 this.btnLoading = false;
-              });
+              })
           }
         }
       },
@@ -608,9 +608,9 @@
                 })
                 .catch(() => {
                   this.btnLoading = false;
-                });
+                })
             }
-          });
+          })
       },
     },
     computed: {

@@ -225,7 +225,7 @@
 					.then(({ data }) => {
 						this.daftar_permissions = data.permissions;
 						this.datatableLoading = false;
-					});
+					})
 			},
 			dataTableRowClicked(item) {
 				if (item === this.expanded[0]) {
@@ -270,7 +270,7 @@
 							})
 							.catch(() => {
 								this.btnLoading = false;
-							});
+							})
 					}
 				}
 			},
@@ -303,9 +303,9 @@
 								})
 								.catch(() => {
 									this.btnLoading = false;
-								});
+								})
 						}
-					});
+					})
 			},
 		},
 		computed: {

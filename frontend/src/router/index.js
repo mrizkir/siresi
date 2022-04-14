@@ -70,6 +70,17 @@ const routes = [
     component: () =>
       import('../views/pages/admin/transaksi/TransaksiResiPicker.vue'),
   },
+  // transaksi  - posisi resi yang ada di tangan checker
+  {
+    path: '/transaksi/resichecker',
+    name: 'TransaksiResiChecker',
+    meta: {
+      title: 'TRANSAKSI - RESI CHECKER',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiResiChecker.vue'),
+  },
   // setting  - pengguna
   {
     path: '/setting/pengguna/permissions',

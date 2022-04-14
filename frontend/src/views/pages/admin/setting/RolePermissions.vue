@@ -166,7 +166,7 @@
 					})
 					.catch(() => {
 						this.btnLoading = false;
-					});
+					})
 			},
 			revoke(item) {
 				this.btnLoading = true;
@@ -189,7 +189,7 @@
 					})
 					.catch(() => {
 						this.btnLoading = false;
-					});
+					})
 			},
 			close() {
 				this.btnLoading = false;

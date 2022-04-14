@@ -49,13 +49,13 @@
               <v-card-text>
                 <v-radio-group
                   v-model="picker_id"
-                  @change="onSubmit"                
+                  @change="onSubmit"    
                 >
                   <v-radio
                     v-for="(item,index) in daftar_picker"
                     :key="index"
                     :label="`${item.name} (${item.jumlah})`"
-                    :value="item.id"                  
+                    :value="item.id"      
                   />
                 </v-radio-group>
                 <v-alert
@@ -113,7 +113,7 @@
       //form
       form_valid: true,      
       picker_id: null,
-      formdata: {        
+      formdata: {    
         no_resi: null,
       },
       error_no_resi_server_side: null,
@@ -121,7 +121,7 @@
       rule_no_resi: [value => !!value || 'Mohon untuk di isi nomor resi !!!'],      
     }),
     methods: {
-      initialize: async function() {        
+      async initialize() {
         await this.$ajax
           .post('/transaksi/picker', 
           {
@@ -135,9 +135,9 @@
           .then(({ data }) => {
             this.waktu = data.waktu
             this.daftar_picker = data.picker       
-          });
+          })
       },
-      onSubmit() {        
+      onSubmit() {    
         if (this.$refs.frmdata.validate()) {
           this.$ajax
           .post(
@@ -157,7 +157,7 @@
           })
           .catch(() => {
             this.picker_id = null;
-          });
+          })
         } else {
           this.$nextTick(() => {
             this.picker_id = null

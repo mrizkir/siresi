@@ -139,7 +139,7 @@
       waktu: null,
     }),
     methods: {
-      initialize: async function() {
+      async initialize() {
         this.datatableLoading = true
         await this.$ajax
           .post(

@@ -13,6 +13,34 @@ use App\Helpers\Helper;
 
 class ResiPickerController extends Controller
 {
+  /**
+   * daftar resi yang sedang berada di picker
+   */
+  public function index(Request $request)
+  {
+    $this->hasPermissionTo('TRANSAKSI-RESI-PICKER_BROWSE');
+
+    $data = User::select(\DB::raw('
+      resi.id,
+      users.name,
+      users.nomor_hp,
+      users.foto,
+      resi.no_resi,
+      resi.created_at,
+      resi.updated_at
+    '))
+    ->join('resi', 'resi.user_id_picker', 'users.id')
+    ->where('users.default_role', 'picker')
+    ->where('resi.status', 1)
+    ->get();
+
+    return Response()->json([
+      'status'=>1,
+      'pid'=>'fetchdata',      
+      'resi'=>$data,      
+      'message'=>'Fetch data resi picker berhasil diperoleh'
+    ], 200);
+  }
   public function picker(Request $request)
   {
     $this->hasPermissionTo('TRANSAKSI-ADMIN-SCAN-RESI_BROWSE');

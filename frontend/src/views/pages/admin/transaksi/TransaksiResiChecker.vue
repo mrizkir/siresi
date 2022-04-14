@@ -2,7 +2,9 @@
   <AdminLayout>
     <ModuleHeader>
       <template v-slot:icon>mdi-email-variant</template>
-      <template v-slot:name>TRANSAKSI RESI PICKER</template>
+      <template v-slot:name>
+        TRANSAKSI RESI CHECKER
+      </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
           <template v-slot:divider>
@@ -12,7 +14,7 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          Daftar resi posisi di picker
+          Daftar resi yang sudah diperiksa oleh Checker
         </v-alert>
       </template>
     </ModuleHeader>
@@ -49,7 +51,7 @@
           >
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR RESI PICKER</v-toolbar-title>
+                <v-toolbar-title>DAFTAR RESI CHECKER</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
                 <v-spacer></v-spacer>
               </v-toolbar>
@@ -60,7 +62,7 @@
               </v-avatar>
             </template>
             <template v-slot:item.created_at="{ item }">
-              {{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
+              {{ $date(item.created_at).format("DD/MM/YYYY HH:mm") }}
             </template>
           </v-data-table>
         </v-col>
@@ -69,10 +71,10 @@
   </AdminLayout>
 </template>
 <script>
-  import AdminLayout from '@/views/layouts/AdminLayout'
-  import ModuleHeader from '@/components/ModuleHeader'
+  import AdminLayout from "@/views/layouts/AdminLayout";
+  import ModuleHeader from "@/components/ModuleHeader";
   export default {
-    name: 'TransaksiResiPicker',
+    name: "TransaksiResiChecker",
     created() {
       this.breadcrumbs = [
         {
@@ -86,7 +88,7 @@
           href: '#',
         },
         {
-          text: 'RESI PICKER',
+          text: 'RESI CHECKER',
           disabled: true,
           href: '#',
         },
@@ -112,13 +114,13 @@
     methods: {
       async initialize() {
         await this.$ajax
-          .get('/transaksi/resipicker', {
+          .get('/transaksi/resichecker', {
             headers: {
               Authorization: this.$store.getters['auth/Token'],
             },
           })
           .then(({ data }) => {
-            this.datatable = data.resi
+            this.datatable = data.resi            
           })
       },
       dataTableRowClicked(item) {

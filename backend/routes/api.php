@@ -20,6 +20,9 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->get('/auth/refresh', ['uses'=>'AuthController@refresh', 'as'=>'auth.refresh']);
 	$router->get('/auth/me', ['uses'=>'AuthController@me', 'as'=>'auth.me']);
 
+	//transaksi - resi picker 
+	$router->get('/transaksi/resipicker',['uses'=>'Transaksi\ResiPickerController@index','as'=>'transaksi-resi-picker.index']);
+	
 	//transaksi - ADMIN scan resi
 	$router->post('/transaksi/resi/search',['uses'=>'Transaksi\ResiController@search','as'=>'resi.search']);
 
@@ -27,6 +30,9 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	$router->post('/transaksi/picker', ['middleware'=>['role:superadmin|admin|handoffer|checker'],'uses'=>'Transaksi\ResiPickerController@picker','as'=>'transaksi-resi-picker.picker']);
 	//digunakan untuk menyimpan resi yang dihandle oleh seorang picker dilakukan oleh Admin
 	$router->post('/transaksi/picker/store', ['middleware'=>['role:superadmin|admin'],'uses'=>'Transaksi\ResiPickerController@store','as'=>'transaksi-resi-picker.store']);
+	
+	//transaksi - resi checker 
+	$router->get('/transaksi/resichecker',['uses'=>'Transaksi\ResiCheckerController@index','as'=>'transaksi-resi-checker.index']);
 	
 	//transaksi - CHECKER scan resi
 	//digunakan untuk mendapatkan daftar resi yang dilakukan oleh seorang checker

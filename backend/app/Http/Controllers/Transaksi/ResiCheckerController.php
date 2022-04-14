@@ -13,17 +13,34 @@ use App\Helpers\Helper;
 
 class ResiCheckerController extends Controller
 {
+  /**
+   * daftar resi yang sedang berada di picker
+   */
   public function index(Request $request)
   {
-    $this->hasPermissionTo('TRANSAKSI-CHECKER-SCAN-RESI_BROWSE');
+    $this->hasPermissionTo('TRANSAKSI-RESI-CHECKER_BROWSE');
+
+    $data = User::select(\DB::raw('
+      resi.id,
+      users.name,
+      users.nomor_hp,
+      users.foto,
+      resi.no_resi,
+      resi.created_at,
+      resi.updated_at
+    '))
+    ->join('resi', 'resi.user_id_scan', 'users.id')
+    ->where('users.default_role', 'checker')
+    ->where('resi.status', 2) //sudah discan oleh checker
+    ->get();
 
     return Response()->json([
       'status'=>1,
-      'pid'=>'fetchdata',          
-      'waktu'=>Helper::tanggal('d F Y H:i:s'),
-      'message'=>'Fetch data resi berhasil diperoleh'
-    ], 200);  
-  } 
+      'pid'=>'fetchdata',      
+      'resi'=>$data,      
+      'message'=>'Fetch data resi picker berhasil diperoleh'
+    ], 200);
+  }
   public function search(Request $request)
   {
     $this->hasPermissionTo('TRANSAKSI-RESI_BROWSE');
@@ -35,11 +52,13 @@ class ResiCheckerController extends Controller
     $search = $request->input('search');
     $daftar_resi = \DB::table('resi')
       ->select(\DB::raw('
-        id,        
-        no_resi                
+        resi.id,        
+        resi.no_resi,
+        users.name            
       '))      
+      ->join('users', 'users.id', 'resi.user_id_picker')
       ->whereRaw("no_resi LIKE '%$search%'")   
-      ->where('status', 1)     
+      ->where('resi.status', 1)     
       ->get();
 
 		return Response()->json([

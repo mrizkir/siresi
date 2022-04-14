@@ -355,7 +355,7 @@
               this.datatable = data.roles;
               this.datatableLoading = false;
             }
-          });
+          })
       },
       dataTableRowClicked(item) {
         if (item === this.expanded[0]) {
@@ -378,7 +378,7 @@
             if (status == 200) {
               this.permissions_selected = data.permissions;
             }
-          });
+          })
         this.dialogdetail = true;
       },
       editItem(item) {
@@ -397,7 +397,7 @@
             if (status == 200) {
               this.daftar_permissions = data.permissions;
             }
-          });
+          })
         this.$ajax
           .get("/setting/pengguna/roles/" + item.id + "/permission", {
             headers: {
@@ -408,7 +408,7 @@
             if (status == 200) {
               this.permissions_selected = data.permissions;
             }
-          });
+          })
         this.dialogRolePermission = true;
         this.editedItem = item;
       },
@@ -450,7 +450,7 @@
               })
               .catch(() => {
                 this.btnLoading = false;
-              });
+              })
           } else {
             this.$ajax
               .post(
@@ -470,7 +470,7 @@
               })
               .catch(() => {
                 this.btnLoading = false;
-              });
+              })
           }
         }
       },

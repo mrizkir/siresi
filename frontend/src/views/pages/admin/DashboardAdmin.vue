@@ -34,7 +34,7 @@ export default {
           }
         })      
     },
-    logout() {      
+    logout() {  
       this.$ajax
         .post(
           "/auth/logout",

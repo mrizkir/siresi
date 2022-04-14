@@ -47,6 +47,8 @@ class PermissionsTableSeeder extends Seeder
 
 		$modules = [
 			'TRANSAKSI-RESI',
+			'TRANSAKSI-RESI-PICKER',
+			'TRANSAKSI-RESI-CHECKER',
 			'TRANSAKSI-ADMIN-SCAN-RESI',
 			'TRANSAKSI-CHECKER-SCAN-RESI',
 			'TRANSAKSI-HANDOFFER-SCAN-RESI',			
