@@ -43,6 +43,9 @@ $router->group(['prefix'=>'v1', 'middleware'=>'auth:api'], function () use ($rou
 	//digunakan untuk menyimpan resi dilakukan oleh checker
 	$router->post('/transaksi/checker/store', ['middleware'=>['role:superadmin|checker'],'uses'=>'Transaksi\ResiCheckerController@store','as'=>'transaksi-resi-checker.store']);
 
+	//transaksi - resi checker 
+	$router->get('/transaksi/resihandoffer',['uses'=>'Transaksi\ResiHandofferController@index','as'=>'transaksi-resi-handoffer.index']);
+	
 	//transaksi - HANDOFFER scan resi
 	//digunakan untuk mendapatkan daftar resi yang dilakukan oleh seorang hand offer
 	$router->post('/transaksi/handoffer', ['middleware'=>['role:superadmin|admin|handoffer'],'uses'=>'Transaksi\ResiHandofferController@index','as'=>'transaksi-resi-handoffer.index']);

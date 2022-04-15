@@ -81,6 +81,17 @@ const routes = [
     component: () =>
       import('../views/pages/admin/transaksi/TransaksiResiChecker.vue'),
   },
+  // transaksi  - posisi resi yang ada di tangan handoffer
+  {
+    path: '/transaksi/resihandoffer',
+    name: 'TransaksiResiHandoffer',
+    meta: {
+      title: 'TRANSAKSI - RESI HANDOFFER',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiResiHandoffer.vue'),
+  },
   // setting  - pengguna
   {
     path: '/setting/pengguna/permissions',

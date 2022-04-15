@@ -29,9 +29,6 @@ class CreateResiTable extends Migration
       $table->index('user_id_scan');
       $table->foreign('user_id_scan')->references('id')->on('users');
 
-      $table->index('resi_id_src');
-      $table->foreign('resi_id_src')->references('id')->on('resi');
-
       $table->timestamps();
     });
   }

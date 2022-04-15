@@ -164,6 +164,9 @@
           case 'no_resi':
             alias = 'NOMOR RESI'
             break
+          case 'name':
+            alias = 'NAMA CHECKER'
+            break
         }
         return alias
       },

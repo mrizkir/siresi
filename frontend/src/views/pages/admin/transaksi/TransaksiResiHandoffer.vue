@@ -2,9 +2,7 @@
   <AdminLayout>
     <ModuleHeader>
       <template v-slot:icon>mdi-email-variant</template>
-      <template v-slot:name>
-        TRANSAKSI RESI CHECKER
-      </template>
+      <template v-slot:name> TRANSAKSI RESI HANDOFFER </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
           <template v-slot:divider>
@@ -14,7 +12,7 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          Daftar resi yang sudah diperiksa oleh Checker
+          Daftar resi yang sudah diperiksa oleh Handoffer
         </v-alert>
       </template>
     </ModuleHeader>
@@ -51,7 +49,7 @@
           >
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR RESI CHECKER</v-toolbar-title>
+                <v-toolbar-title>DAFTAR RESI HANDOFFER</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical></v-divider>
                 <v-spacer></v-spacer>
               </v-toolbar>
@@ -71,69 +69,69 @@
   </AdminLayout>
 </template>
 <script>
-  import AdminLayout from "@/views/layouts/AdminLayout";
-  import ModuleHeader from "@/components/ModuleHeader";
-  export default {
-    name: "TransaksiResiChecker",
-    created() {
-      this.breadcrumbs = [
-        {
-          text: 'HOME',
-          disabled: false,
-          href: '/dashboard/' + this.$store.getters['auth/Token'],
-        },
-        {
-          text: 'TRANSAKSI',
-          disabled: true,
-          href: '#',
-        },
-        {
-          text: 'RESI CHECKER',
-          disabled: true,
-          href: '#',
-        },
-      ]
-    },
-    mounted() {
-      this.initialize()
-    },
-    data: () => ({
-      breadcrumbs: [],
-      //tables
-      expanded: [],
-      search: null,
-      datatable: [],
-      headers: [
-        { text: '', value: 'foto' },
-        { text: 'NAMA PICKER', value: 'name', sortable: true },
-        { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
-        { text: 'NOMOR RESI', value: 'no_resi', sortable: true },
-        { text: 'TANGGAL SCAN', value: 'created_at', sortable: true },
-      ],
-    }),
-    methods: {
-      async initialize() {
-        await this.$ajax
-          .get('/transaksi/resichecker', {
-            headers: {
-              Authorization: this.$store.getters['auth/Token'],
-            },
-          })
-          .then(({ data }) => {
-            this.datatable = data.resi            
-          })
+import AdminLayout from "@/views/layouts/AdminLayout";
+import ModuleHeader from "@/components/ModuleHeader";
+export default {
+  name: "TransaksiResiHandoffer",
+  created() {
+    this.breadcrumbs = [
+      {
+        text: "HOME",
+        disabled: false,
+        href: "/dashboard/" + this.$store.getters["auth/Token"],
       },
-      dataTableRowClicked(item) {
-        if (item === this.expanded[0]) {
-          this.expanded = []
-        } else {
-          this.expanded = [item]
-        }
+      {
+        text: "TRANSAKSI",
+        disabled: true,
+        href: "#",
       },
+      {
+        text: "RESI HANDOFFER",
+        disabled: true,
+        href: "#",
+      },
+    ];
+  },
+  mounted() {
+    this.initialize();
+  },
+  data: () => ({
+    breadcrumbs: [],
+    //tables
+    expanded: [],
+    search: null,
+    datatable: [],
+    headers: [
+      { text: "", value: "foto" },
+      { text: "NAMA CHECKER", value: "name", sortable: true },
+      { text: "NOMOR HP", value: "nomor_hp", sortable: true },
+      { text: "NOMOR RESI", value: "no_resi", sortable: true },
+      { text: "TANGGAL SCAN", value: "created_at", sortable: true },
+    ],
+  }),
+  methods: {
+    async initialize() {
+      await this.$ajax
+        .get("/transaksi/resihandoffer", {
+          headers: {
+            Authorization: this.$store.getters["auth/Token"],
+          },
+        })
+        .then(({ data }) => {
+          this.datatable = data.resi;
+        });
     },
-    components: {
-      AdminLayout,
-      ModuleHeader,
+    dataTableRowClicked(item) {
+      if (item === this.expanded[0]) {
+        this.expanded = [];
+      } else {
+        this.expanded = [item];
+      }
     },
-  }
+  },
+  components: {
+    AdminLayout,
+    ModuleHeader,
+  },
+};
 </script>

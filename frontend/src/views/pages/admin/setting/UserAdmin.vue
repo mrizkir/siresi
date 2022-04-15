@@ -351,6 +351,7 @@
       //tables
       headers: [
         { text: "", value: "foto" },
+        { text: "ID", value: "id", sortable: true },
         { text: "USERNAME", value: "username", sortable: true },
         { text: "NAME", value: "name", sortable: true },
         { text: "EMAIL", value: "email", sortable: true },

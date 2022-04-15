@@ -19,20 +19,39 @@ class ResiCheckerController extends Controller
   public function index(Request $request)
   {
     $this->hasPermissionTo('TRANSAKSI-RESI-CHECKER_BROWSE');
-
+    
     $data = User::select(\DB::raw('
       resi.id,
       users.name,
       users.nomor_hp,
       users.foto,
       resi.no_resi,
+      resi.resi_id_src,
       resi.created_at,
       resi.updated_at
     '))
-    ->join('resi', 'resi.user_id_scan', 'users.id')
-    ->where('users.default_role', 'checker')
-    ->where('resi.status', 2) //sudah discan oleh checker
-    ->get();
+    ->join('resi', 'resi.user_id_scan', 'users.id')    
+    ->where('users.default_role', 'checker')    
+    ->whereRaw('(resi.status = 2 OR resi.status = 20)');//sudah discan oleh checker
+    
+    if (!$this->hasRole('superadmin'))
+    {
+      $data = $data->where('resi.user_id_scan', $this->getUserid());
+    }    
+    $data = $data->get();    
+    
+    $data->transform(function ($item, $key) {	
+      $data_checker = \DB::table('resi')
+      ->select(\DB::raw('
+        users.name
+      '))		
+      ->join('users', 'users.id', 'resi.user_id_picker')
+      ->where('resi.id', $item->resi_id_src)
+      ->first();
+
+      $item->name=$data_checker->name;
+      return $item;
+    });
 
     return Response()->json([
       'status'=>1,
@@ -90,7 +109,7 @@ class ResiCheckerController extends Controller
         'status'=>2
       ]);
   
-      $data_resi->status = 10;
+      $data_resi->status = 10; //resi yang udah discan oleh checker diberi kode 10
       $data_resi->save();
       
       return $resi;

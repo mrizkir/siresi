@@ -119,7 +119,7 @@
         color="purple"
       >
         <v-list-item-icon class="mr-2">
-          <v-icon>mdi-credit-card-scan</v-icon>
+          <v-icon>mdi-arrow-collapse-right</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>SCAN RESI</v-list-item-title>
@@ -133,7 +133,7 @@
         color="purple"
       >
         <v-list-item-icon class="mr-2">
-          <v-icon>mdi-credit-card-scan</v-icon>
+          <v-icon>mdi-arrow-collapse-right</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>SCAN RESI</v-list-item-title>
@@ -147,7 +147,7 @@
         color="purple"
       >
         <v-list-item-icon class="mr-2">
-          <v-icon>mdi-credit-card-scan</v-icon>
+          <v-icon>mdi-arrow-collapse-right</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>SCAN RESI</v-list-item-title>
@@ -161,7 +161,7 @@
         v-if="CAN_ACCESS('TRANSAKSI-RESI-PICKER_BROWSE')"
       >
         <v-list-item-icon class="mr-2">
-          <v-icon>mdi-email-variant</v-icon>
+          <v-icon>mdi-arrow-collapse-right</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>RESI PICKER</v-list-item-title>
@@ -174,10 +174,23 @@
         color="purple"
       >
         <v-list-item-icon class="mr-2">
-          <v-icon>mdi-email-variant</v-icon>
+          <v-icon>mdi-arrow-collapse-right</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>RESI CHECKER</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        to="/transaksi/resihandoffer"        
+        link
+        active-class="purple accent-1"
+        color="purple"
+      >
+        <v-list-item-icon class="mr-2">
+          <v-icon>mdi-arrow-collapse-right</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>RESI HANDOFFER</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('SETTING-GROUP')">SETTING</v-subheader>

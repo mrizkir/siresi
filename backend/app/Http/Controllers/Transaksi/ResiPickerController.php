@@ -30,8 +30,9 @@ class ResiPickerController extends Controller
       resi.updated_at
     '))
     ->join('resi', 'resi.user_id_picker', 'users.id')
+    ->where('resi.user_id_scan', $this->getUserid())
     ->where('users.default_role', 'picker')
-    ->where('resi.status', 1)
+    ->whereRaw('(resi.status = 1 OR resi.status = 10)')
     ->get();
 
     return Response()->json([
@@ -51,6 +52,7 @@ class ResiPickerController extends Controller
       COUNT(id) AS jumlah            
     '))
     ->whereDate('created_at', Helper::tanggal('Y-m-d'))
+    ->whereNull('resi_id_src')
     ->groupBy('user_id_picker');
 
     $data = User::select(\DB::raw('
