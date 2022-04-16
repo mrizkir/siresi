@@ -36,6 +36,7 @@
                   :rules="rule_no_resi"
                   filled
                   :error-messages="error_no_resi_server_side"
+                  autofocus
                 >
                 </v-text-field>
               </v-card-text>

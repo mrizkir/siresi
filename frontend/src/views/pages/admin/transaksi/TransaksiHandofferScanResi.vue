@@ -44,7 +44,9 @@
                     prepend-icon="mdi-database-search"
                     return-object
                     ref="ref_data_resi"
-                  ></v-autocomplete>
+                    autofocus
+                  >
+                  </v-autocomplete>
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-avatar
