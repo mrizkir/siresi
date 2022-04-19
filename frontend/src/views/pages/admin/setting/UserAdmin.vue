@@ -144,7 +144,7 @@
                           :rules="rule_user_password"
                           filled
                         >
-                        </v-text-field>												
+                        </v-text-field>			
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -210,7 +210,7 @@
                           :rules="rule_user_passwordEdit"
                           filled
                         >
-                        </v-text-field>												
+                        </v-text-field>			
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -362,7 +362,7 @@
       search: "",
       daftar_users: [],
       //form
-      form_valid: true,			
+      form_valid: true,
       dialog: false,
       dialogEdit: false,
       dialogUserPermission: false,

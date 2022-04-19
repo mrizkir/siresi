@@ -109,7 +109,7 @@
         <v-list-item-content>
           <v-list-item-title>DASHBOARD</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>						
+      </v-list-item>	
       <v-subheader class="purple accent-5 white--text" v-if="CAN_ACCESS('TRANSAKSI-GROUP')">TRANSAKSI</v-subheader>
       <v-list-item
         to="/transaksi/admin/scanresi"
@@ -123,6 +123,20 @@
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>SCAN RESI</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item
+        to="/transaksi/admin/pilihpicker"
+        v-if="CAN_ACCESS('TRANSAKSI-ADMIN-SCAN-RESI_BROWSE') && DEFAULT_ROLE == 'admin'"
+        link
+        active-class="purple accent-1"
+        color="purple"
+      >
+        <v-list-item-icon class="mr-2">
+          <v-icon>mdi-arrow-collapse-right</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>PILIH PICKER</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-item

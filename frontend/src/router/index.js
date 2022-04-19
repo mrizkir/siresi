@@ -34,6 +34,16 @@ const routes = [
     component: () =>
       import('../views/pages/admin/transaksi/TransaksiAdminScanResi.vue'),
   },
+  {
+    path: '/transaksi/admin/pilihpicker',
+    name: 'TransaksiAdminPilihPicker',
+    meta: {
+      title: 'TRANSAKSI - PILIH PICKER',
+      requiresAuth: true,
+    },
+    component: () =>
+      import('../views/pages/admin/transaksi/TransaksiAdminPilihPicker.vue'),
+  },
 
   // transaksi  - checker scan resi
   {

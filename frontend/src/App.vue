@@ -22,7 +22,7 @@
 <script>
 	import confirm from "./components/Confirm"
 	export default {	
-		name: "Campus50",
+		name: "Siresi",
 		created(){
 			this.$ajax.interceptors.request.use((config) => {
 				this.setLoading(true);

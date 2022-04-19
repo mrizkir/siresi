@@ -5,7 +5,7 @@
         mdi-credit-card-scan
       </template>
       <template v-slot:name>
-        SCAN RESI [{{ waktu }}]
+        PILIH PICKER [{{ waktu }}]
       </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
@@ -16,7 +16,7 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          digunakan untuk melakukan scan resi
+          digunakan untuk memilih picker yang akan mengambil resi
         </v-alert>
       </template>
     </ModuleHeader>
@@ -52,23 +52,27 @@
         </v-col>
       </v-row>
       <v-form ref="frmdata" v-model="form_valid" lazy-validation>
-        <v-row>
-          <v-col cols="12">
+        <v-row>          
+          <v-col cols="12">          
             <v-card>
               <v-card-title>
-                <span class="headline">Masukan Nomor Resi Invoice</span>
+                <span class="headline">Pilih Picker</span>
               </v-card-title>
               <v-card-text>
-                <v-text-field
-                  v-model="formdata.no_resi"
-                  label="Nomor Resi"
+                <v-select
+                  v-model="formdata.picker_id"
+                  :items="daftar_picker"
+                  item-text="name"
+                  item-value="id"
                   outlined
-                  :rules="rule_no_resi"
-                  filled
-                  :error-messages="error_no_resi_server_side"
-                  autofocus
+                  :rules="rule_picker"
                 >
-                </v-text-field>
+                </v-select>
+                <v-text-field
+                  v-model="formdata.jumlah_resi"
+                  outlined
+                  :rules="rule_jumlah_resi"
+                />                
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -80,7 +84,7 @@
                   SIMPAN
                 </v-btn>
               </v-card-actions>
-            </v-card>          
+            </v-card>
           </v-col>
         </v-row>
       </v-form>
@@ -92,7 +96,7 @@
   import AdminLayout from '@/views/layouts/AdminLayout'
   import ModuleHeader from '@/components/ModuleHeader'
   export default {
-    name: 'TransaksiAdminScanResi',
+    name: 'TransaksiAdminPilihPicker',
     created() {
       if (this.$store.getters['auth/DefaultRole'] != 'admin') {
         this.$router.push('/dashboard/' + this.$store.getters['auth/Token'])
@@ -109,13 +113,11 @@
           href: '#',
         },
         {
-          text: 'SCAN RESI',
+          text: 'PILIH PICKER',
           disabled: true,
           href: '#',
         },
       ]
-    },
-    mounted() {
       this.initialize()
     },
     data: () => ({
@@ -127,25 +129,31 @@
       jumlah_resi_yang_lalu: 0,
       //form
       form_valid: true,
-      picker_id: null,
       formdata: {
-        no_resi: null,
-      },
-      error_no_resi_server_side: null,
-      //form rules      
-      rule_no_resi: [(value) => !!value || 'Mohon untuk di isi nomor resi !!!'],
+        picker_id: null,
+        jumlah_resi: 0,
+      },      
+      //form rules
+      rule_picker: [
+        (value) => !!value || 'Mohon untuk di isi jumlah resi !!!',
+      ],
+      rule_jumlah_resi: [
+        (value) => !!value || 'Mohon untuk di isi jumlah resi !!!',
+        (value) =>
+          /^[0-9]+$/.test(value) || "Jumlah resi hanya boleh angka",        
+      ],
     }),
     methods: {
       async initialize() {
         await this.$ajax
           .post(
-            '/transaksi/picker',
+            '/transaksi/picker', 
             {},
             {
               headers: {
                 Authorization: this.$store.getters['auth/Token'],
               },
-            }
+          }
           )
           .then(({ data }) => {
             this.waktu = data.waktu
@@ -157,41 +165,27 @@
       onSubmit() {
         if (this.$refs.frmdata.validate()) {
           this.$ajax
-            .post(
-              '/transaksi/picker/store',
-              {
-                no_resi: this.formdata.no_resi,
-                picker_id: this.picker_id,
+          .post(
+            '/transaksi/picker/storeresipicker',
+            {
+              jumlah_resi: this.formdata.jumlah_resi,
+              picker_id: this.formdata.picker_id,
+            },
+            {
+              headers: {
+                Authorization: this.$store.getters['auth/Token'],
               },
-              {
-                headers: {
-                  Authorization: this.$store.getters['auth/Token'],
-                },
-              }
-            )
-            .then(() => {
-              this.$router.go()
-            })
-            .catch(() => {
-              this.picker_id = null
-            })
-        } else {
-          this.$nextTick(() => {
+            }
+          )
+          .then(() => {
+            this.$router.go()
+          })
+          .catch(() => {
             this.picker_id = null
           })
         }
       },
-    },
-    watch: {
-      form_valid(val) {
-        if (val == false) {
-          this.picker_id = null
-        }
-      },
-      error_no_resi_server_side(val) {
-        console.log(val)
-      },
-    },
+    },    
     components: {
       AdminLayout,
       ModuleHeader,

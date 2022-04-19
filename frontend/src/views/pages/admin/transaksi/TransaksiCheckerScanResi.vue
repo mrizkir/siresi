@@ -189,7 +189,7 @@
             this.$router.go()
           })
           .catch(() => {
-            this.picker_id = null;
+            this.picker_id = null
           })
       },
       clearDataResi() {

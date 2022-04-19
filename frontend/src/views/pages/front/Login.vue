@@ -1,7 +1,7 @@
 <template>
   <FrontLayout>
     <v-container class="white pa-0" fluid>
-      <v-row no-gutters align="center" justify="center">				
+      <v-row no-gutters align="center" justify="center">
         <v-col sm="12" md="4">
           <v-card class="pa-0" elevation="0" tile>
             <v-card height="480px" elevation="0">
@@ -17,7 +17,7 @@
               >
                 <h1
                   class="text-center display-1 font-weight-black pa-3"
-                  style="color:#1A237E"
+                  style="color: #1a237e"
                 >
                   SIRESI
                 </h1>
@@ -53,57 +53,51 @@
                     color="#1A237E"
                     class="white--text"
                     @click="doLogin"
-                    :loading="btnLoading"
                     :disabled="btnLoading"
                     block
                   >
                     Sign In
                   </v-btn>
-                </v-card-actions>                
+                </v-card-actions>
               </v-form>
             </v-card>
-          </v-card>					
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
   </FrontLayout>
 </template>
 <script>
-  import FrontLayout from "@/views/layouts/FrontLayout";
+  import FrontLayout from '@/views/layouts/FrontLayout'
   export default {
-    name: "Login",
+    name: 'Login',
     created() {
-      if (this.$store.getters["auth/Authenticated"]) {
+      if (this.$store.getters['auth/Authenticated']) {
         this.$router.push(
-          "/dashboard/" + this.$store.getters["auth/AccessToken"]
-        );
+          '/dashboard/' + this.$store.getters['auth/AccessToken']
+        )
       }
     },
     data: () => ({
       btnLoading: false,
       //form
       form_valid: true,
-      form_error: false,			
+      form_error: false,
       formlogin: {
         username: '',
         password: '',
-      },      
+      },
       rule_username: [
-        value => !!value || 'Kolom Username mohon untuk diisi !!!',
+        (value) => !!value || 'Kolom Username mohon untuk diisi !!!',
       ],
       rule_password: [
-        value => !!value || 'Kolom Password mohon untuk diisi !!!',
+        (value) => !!value || 'Kolom Password mohon untuk diisi !!!',
       ],
-      rule_email: [
-        value => !!value || 'Email mohon untuk diisi !!!',
-        v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-      ],
-      rule_code: [value => /^[0-9]+$/.test(value) || 'Code hanya boleh angka'],
     }),
     methods: {
-      doLogin: async function() {
+      doLogin: async function () {
         if (this.$refs.frmlogin.validate()) {
-          this.btnLoading = true;
+          this.btnLoading = true
           await this.$ajax
             .post('/auth/login', {
               username: this.formlogin.username,
@@ -116,26 +110,26 @@
                     Authorization: data.token_type + ' ' + data.access_token,
                   },
                 })
-                .then(response => {
+                .then((response) => {
                   var data_user = {
                     token: data,
                     user: response.data,
-                  };
-                  this.$store.dispatch('auth/afterLoginSuccess', data_user);
-                });
-              this.btnLoading = false;
-              this.form_error = false;
-              this.$router.push('/dashboard/' + data.access_token);
+                  }
+                  this.$store.dispatch('auth/afterLoginSuccess', data_user)
+                })
+              this.btnLoading = false
+              this.form_error = false
+              this.$router.push('/dashboard/' + data.access_token)
             })
             .catch(() => {
-              this.form_error = true;
-              this.btnLoading = false;
-            });
+              this.form_error = true
+              this.btnLoading = false
+            })
         }
       },
     },
     components: {
       FrontLayout,
     },
-  };
+  }
 </script>

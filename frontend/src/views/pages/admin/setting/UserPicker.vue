@@ -144,7 +144,7 @@
                           :rules="rule_user_password"
                           filled
                         >
-                        </v-text-field>												
+                        </v-text-field>			
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -210,7 +210,7 @@
                           :rules="rule_user_passwordEdit"
                           filled
                         >
-                        </v-text-field>												
+                        </v-text-field>			
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -532,7 +532,7 @@
                   email: this.editedItem.email,
                   nomor_hp: this.editedItem.nomor_hp,
                   username: this.editedItem.username,
-                  password: this.editedItem.password,									
+                  password: this.editedItem.password,						
                 },
                 {
                   headers: {
@@ -556,7 +556,7 @@
                   email: this.editedItem.email,
                   nomor_hp: this.editedItem.nomor_hp,
                   username: this.editedItem.username,
-                  password: this.editedItem.password,									
+                  password: this.editedItem.password,						
                 },
                 {
                   headers: {
