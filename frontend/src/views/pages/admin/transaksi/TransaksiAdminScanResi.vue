@@ -51,7 +51,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-form ref="frmdata" v-model="form_valid" lazy-validation>
+      <v-form ref="frmdata" v-model="form_valid" lazy-validation @submit.prevent="onSubmit">
         <v-row>
           <v-col cols="12">
             <v-card>
@@ -64,8 +64,7 @@
                   label="Nomor Resi"
                   outlined
                   :rules="rule_no_resi"
-                  filled
-                  :error-messages="error_no_resi_server_side"
+                  filled                  
                   autofocus
                 >
                 </v-text-field>
@@ -154,7 +153,7 @@
             this.jumlah_resi_yang_lalu = data.jumlah_resi_yang_lalu
           })
       },
-      onSubmit() {
+      onSubmit() {        
         if (this.$refs.frmdata.validate()) {
           this.$ajax
             .post(
