@@ -50,39 +50,61 @@
             </v-list-item>
           </v-card>
         </v-col>
-      </v-row>
-      <v-form ref="frmdata" v-model="form_valid" lazy-validation @submit.prevent="onSubmit">
+      </v-row>      
         <v-row>
-          <v-col cols="12">
-            <v-card>
-              <v-card-title>
-                <span class="headline">Masukan Nomor Resi Invoice</span>
-              </v-card-title>
-              <v-card-text>
-                <v-text-field
-                  v-model="formdata.no_resi"
-                  label="Nomor Resi"
-                  outlined
-                  :rules="rule_no_resi"
-                  filled                  
-                  autofocus
-                >
-                </v-text-field>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn
-                  color="primary"                  
-                  @click.stop="onSubmit"
-                  :disabled="!form_valid || btnLoading"
-                  x-large
-                >
-                  SIMPAN
-                </v-btn>
-              </v-card-actions>
-            </v-card>          
+          <v-col xs="12" sm="6" md="6">
+            <v-form ref="frmdata" v-model="form_valid" lazy-validation @submit.prevent="onSubmit">
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Masukan Nomor Resi Invoice</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-text-field
+                    v-model="formdata.no_resi"
+                    label="Nomor Resi"
+                    outlined
+                    :rules="rule_no_resi"
+                    filled                  
+                    autofocus
+                    :disabled="btnLoading"
+                    ref="noresi"
+                  >
+                  </v-text-field>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn
+                    color="primary"                  
+                    @click.stop="onSubmit"
+                    :disabled="!form_valid || btnLoading"
+                    x-large
+                  >
+                    SIMPAN
+                  </v-btn>
+                </v-card-actions>
+              </v-card>  
+            </v-form>        
           </v-col>
-        </v-row>
-      </v-form>
+          <v-col xs="12" sm="6" md="6">
+            <v-data-table
+              :headers="headers"
+              :items="datatable"              
+              item-key="id"              
+              class="elevation-1"
+              loading-text="Loading... Please wait"              
+            >
+              <template v-slot:top>
+                <v-toolbar flat color="white">
+                  <v-toolbar-title>10 RESI TERAKHIR</v-toolbar-title>
+                  <v-divider class="mx-4" inset vertical></v-divider>
+                  <v-spacer></v-spacer>
+                </v-toolbar>
+              </template>              
+              <template v-slot:item.created_at="{ item }">
+                {{ $date(item.created_at).format("DD/MM/YYYY HH:mm") }}
+              </template>
+            </v-data-table>
+          </v-col>
+        </v-row>      
     </v-container>
   </AdminLayout>
 </template>
@@ -120,6 +142,13 @@
     data: () => ({
       breadcrumbs: [],
 			btnLoading: false,
+      //daftar resi
+      datatable: [],
+      headers: [
+        { text: 'NOMOR RESI', value: 'no_resi', sortable: false },
+        { text: 'TANGGAL SCAN', value: 'created_at', sortable: false },
+      ],
+      //form
       daftar_picker: [],
       waktu: null,
       jumlah_resi_hari_ini: 0,
@@ -155,6 +184,7 @@
       },
       onSubmit() {        
         if (this.$refs.frmdata.validate()) {
+          this.btnLoading = true
           this.$ajax
             .post(
               '/transaksi/picker/store',
@@ -168,29 +198,18 @@
                 },
               }
             )
-            .then(() => {
-              this.$router.go()
+            .then(() => {              
+              this.$router.go()                
             })
-            .catch(() => {
-              this.picker_id = null
+            .catch(() => {                
+              this.btnLoading = false
+              setTimeout(() => {
+                this.$router.go()         
+              }, 1000);
             })
-        } else {
-          this.$nextTick(() => {
-            this.picker_id = null
-          })
-        }
+        } 
       },
-    },
-    watch: {
-      form_valid(val) {
-        if (val == false) {
-          this.picker_id = null
-        }
-      },
-      error_no_resi_server_side(val) {
-        console.log(val)
-      },
-    },
+    },   
     components: {
       AdminLayout,
       ModuleHeader,
